@@ -1,0 +1,14 @@
+Import("env")
+
+lib = env.Program("tmttest",
+                  [
+                    "test/main.cpp",
+                    "test/win_mem_leak.cpp",
+                    "test/callback_handler.cpp",
+                    "test/googletest/googletest/src/gtest-all.cc",
+
+                    "test/tests/create_and_destroy.cpp",
+                    "test/tests/csi_params.cpp",
+                    "test/tests/default_vals.cpp",
+                  ])
+Return("lib")

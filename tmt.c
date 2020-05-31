@@ -43,13 +43,19 @@
 #define CB(vt, m, a) ((vt)->cb? (vt)->cb(m, vt, a, (vt)->p) : (void)0)
 #define INESC ((vt)->state)
 
-#define COMMON_VARS             \
-    TMTSCREEN *s = &vt->screen; \
-    TMTPOINT *c = &vt->curs;    \
-    TMTLINE *l = CLINE(vt);     \
-    TMTCHAR *t = vt->tabs->chars
+#if defined(__clang__) || defined(__llvm__) || defined (__GNUC__)
+#define MAYBE_UNUSED __attribute__((unused))
+#else
+#define MAYBE_UNUSED
+#endif
 
-#define HANDLER(name) static void name (TMT *vt) { COMMON_VARS; 
+#define COMMON_VARS             \
+    MAYBE_UNUSED TMTSCREEN *s = &vt->screen; \
+    MAYBE_UNUSED TMTPOINT *c = &vt->curs;    \
+    MAYBE_UNUSED TMTLINE *l = CLINE(vt);     \
+    MAYBE_UNUSED TMTCHAR *t = vt->tabs->chars
+
+#define HANDLER(name) static void name (TMT *vt) { COMMON_VARS;
 
 struct TMT{
     TMTPOINT curs, oldcurs;
@@ -67,7 +73,7 @@ struct TMT{
     size_t nmb;
     char mb[BUF_MAX + 1];
 
-    size_t pars[PAR_MAX];   
+    size_t pars[PAR_MAX];
     size_t npar;
     size_t arg;
     enum {S_NUL, S_ESC, S_ARG} state;
@@ -148,7 +154,7 @@ scrdn(TMT *vt, size_t r, size_t n)
         memmove(vt->screen.lines + r + n, vt->screen.lines + r,
                 (vt->screen.nline - n - r) * sizeof(TMTLINE *));
         memcpy(vt->screen.lines + r, buf, n * sizeof(TMTLINE *));
-    
+
         clearlines(vt, r, n);
         dirtylines(vt, r, vt->screen.nline);
     }
