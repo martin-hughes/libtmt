@@ -10,7 +10,7 @@ TestVtWrapper::TestVtWrapper(int cols, int rows) {
 }
 
 TestVtWrapper::~TestVtWrapper() {
-  tmt_reset(this->vt);
+  tmt_close(this->vt);
 }
 
 TMT *TestVtWrapper::get_vt() {
