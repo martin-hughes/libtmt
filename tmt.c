@@ -43,13 +43,19 @@
 #define CB(vt, m, a) ((vt)->cb? (vt)->cb(m, vt, a, (vt)->p) : (void)0)
 #define INESC ((vt)->state)
 
-#define COMMON_VARS             \
-    TMTSCREEN *s = &vt->screen; \
-    TMTPOINT *c = &vt->curs;    \
-    TMTLINE *l = CLINE(vt);     \
-    TMTCHAR *t = vt->tabs->chars
+#if defined(__clang__) || defined(__llvm__) || defined (__GNUC__)
+#define MAYBE_UNUSED __attribute__((unused))
+#else
+#define MAYBE_UNUSED
+#endif
 
-#define HANDLER(name) static void name (TMT *vt) { COMMON_VARS; 
+#define COMMON_VARS             \
+    MAYBE_UNUSED TMTSCREEN *s = &vt->screen; \
+    MAYBE_UNUSED TMTPOINT *c = &vt->curs;    \
+    MAYBE_UNUSED TMTLINE *l = CLINE(vt);     \
+    MAYBE_UNUSED TMTCHAR *t = vt->tabs->chars
+
+#define HANDLER(name) static void name (TMT *vt) { COMMON_VARS;
 
 struct TMT{
     TMTPOINT curs, oldcurs;
@@ -67,7 +73,7 @@ struct TMT{
     size_t nmb;
     char mb[BUF_MAX + 1];
 
-    size_t pars[PAR_MAX];   
+    size_t pars[PAR_MAX];
     size_t npar;
     size_t arg;
     enum {S_NUL, S_ESC, S_ARG} state;
@@ -148,7 +154,7 @@ scrdn(TMT *vt, size_t r, size_t n)
         memmove(vt->screen.lines + r + n, vt->screen.lines + r,
                 (vt->screen.nline - n - r) * sizeof(TMTLINE *));
         memcpy(vt->screen.lines + r, buf, n * sizeof(TMTLINE *));
-    
+
         clearlines(vt, r, n);
         dirtylines(vt, r, vt->screen.nline);
     }
@@ -205,13 +211,13 @@ HANDLER(sgr)
     #define FGBG(c) *(P0(i) < 40? &vt->attrs.fg : &vt->attrs.bg) = c
     for (size_t i = 0; i < vt->npar; i++) switch (P0(i)){
         case  0: vt->attrs                    = defattrs;   break;
-        case  1: case 22: vt->attrs.bold      = P0(0) < 20; break;
-        case  2: case 23: vt->attrs.dim       = P0(0) < 20; break;
-        case  4: case 24: vt->attrs.underline = P0(0) < 20; break;
-        case  5: case 25: vt->attrs.blink     = P0(0) < 20; break;
-        case  7: case 27: vt->attrs.reverse   = P0(0) < 20; break;
-        case  8: case 28: vt->attrs.invisible = P0(0) < 20; break;
-        case 10: case 11: vt->acs             = P0(0) > 10; break;
+        case  1: case 22: vt->attrs.bold      = P0(i) < 20; break;
+        case  2: case 23: vt->attrs.dim       = P0(i) < 20; break;
+        case  4: case 24: vt->attrs.underline = P0(i) < 20; break;
+        case  5: case 25: vt->attrs.blink     = P0(i) < 20; break;
+        case  7: case 27: vt->attrs.reverse   = P0(i) < 20; break;
+        case  8: case 28: vt->attrs.invisible = P0(i) < 20; break;
+        case 10: case 11: vt->acs             = P0(i) > 10; break;
         case 30: case 40: FGBG(TMT_COLOR_BLACK);            break;
         case 31: case 41: FGBG(TMT_COLOR_RED);              break;
         case 32: case 42: FGBG(TMT_COLOR_GREEN);            break;
@@ -352,6 +358,7 @@ tmt_open(size_t nline, size_t ncol, TMTCALLBACK cb, void *p,
     vt->acschars = acs? acs : L"><^v#+:o##+++++~---_++++|<>*!fo";
     vt->cb = cb;
     vt->p = p;
+    vt->attrs = vt->oldattrs = defattrs;
 
     if (!tmt_resize(vt, nline, ncol)) return tmt_close(vt), NULL;
     return vt;
