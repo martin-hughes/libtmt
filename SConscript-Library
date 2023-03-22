@@ -1,7 +1,0 @@
-Import("env")
-
-lib = env.Library("libtmt",
-                  [
-                    "tmt.c",
-                  ])
-Return("lib")

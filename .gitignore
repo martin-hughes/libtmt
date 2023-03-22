@@ -1,5 +1,5 @@
-.sconsign.dblite
-output/
-*.pyc
-__pycache__
-variables.cache
+cmake-*/
+output
+
+# IDE specific folders
+.idea
