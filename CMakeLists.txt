@@ -32,10 +32,15 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/line_is_equal_to.cpp
             test/main.cpp
             test/win_mem_leak.cpp
+            test/write_strings.cpp
+
             test/tests/basic_writing.cpp
             test/tests/create_and_destroy.cpp
             test/tests/csi_params.cpp
-            test/tests/default_vals.cpp)
+            test/tests/default_vals.cpp
+            test/tests/ech.cpp
+    )
+
     target_link_libraries(
             tmt_test
             tmt
