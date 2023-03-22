@@ -28,13 +28,14 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     add_executable(
             tmt_test
-            test/main.cpp
             test/callback_handler.cpp
+            test/line_is_equal_to.cpp
+            test/main.cpp
             test/win_mem_leak.cpp
+            test/tests/basic_writing.cpp
             test/tests/create_and_destroy.cpp
             test/tests/csi_params.cpp
-            test/tests/default_vals.cpp
-    )
+            test/tests/default_vals.cpp)
     target_link_libraries(
             tmt_test
             tmt
