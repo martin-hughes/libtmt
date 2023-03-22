@@ -16,7 +16,7 @@ namespace vt_test {
   void write_cursor_move(TestVtWrapper &vt, CursorMoveDir dir, size_t places) {
     write_csi(vt);
 
-    std::string command = std::to_string(places) + std::to_string(static_cast<unsigned char>(dir));
+    std::string command = std::to_string(places) + static_cast<std::string::value_type>(dir);
 
     write_string(vt, command);
   }

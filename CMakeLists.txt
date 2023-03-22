@@ -37,6 +37,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/basic_writing.cpp
             test/tests/create_and_destroy.cpp
             test/tests/csi_params.cpp
+            test/tests/cursor.cpp
             test/tests/default_vals.cpp
             test/tests/ech.cpp
     )

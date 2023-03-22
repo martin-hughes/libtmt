@@ -9,7 +9,7 @@ extern "C"
 
 #include <string>
 
-enum class CursorMoveDir : unsigned char {
+enum class CursorMoveDir : char {
   Up = 'A',
   Down = 'B',
   Right = 'C',
