@@ -1,10 +1,4 @@
-extern "C"
-{
-#include "tmt.h"
-};
-
-#include "../test_helpers.h"
-#include "gtest/gtest.h"
+#include "../test_includes.h"
 
 TEST(BasicTests, CreateAndDestroy)
 {

@@ -1,57 +1,45 @@
-extern "C"
-{
-#include "tmt.h"
-};
+#include "../test_includes.h"
 
-#include "../test_helpers.h"
-#include "gtest/gtest.h"
+using namespace vt_test;
 
 TEST(BasicTests, WriteSimpleString) {
-  TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
+  TestVtWrapper vt(80, 25);
 
-  const char *str = "Hello, world";
-  tmt_write(vt, str, strlen(str));
+  std::string text = "Hello, world";
+  vt.write_string(text);
 
-  EXPECT_TRUE(line_is_equal_to(*vt, 0, str));
-  EXPECT_TRUE(line_is_equal_to(*vt, 1, ""));
-
-  tmt_close(vt);
+  EXPECT_EQ(vt.get_line_text(0), text);
+  EXPECT_EQ(vt.get_line_text(1), "");
 }
 
 TEST(BasicTests, WriteStringWithNewline) {
-  TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
+  TestVtWrapper vt(80, 25);
 
-  const char *str = "Hello,\nworld";
-  tmt_write(vt, str, strlen(str));
+  std::string text = "Hello,\nworld";
+  vt.write_string(text);
 
-  EXPECT_TRUE(line_is_equal_to(*vt, 0, "Hello,"));
-  EXPECT_TRUE(line_is_equal_to(*vt, 1, "      world"));
-  EXPECT_TRUE(line_is_equal_to(*vt, 2, ""));
-
-  tmt_close(vt);
+  EXPECT_EQ("Hello,", vt.get_line_text(0));
+  EXPECT_EQ("      world", vt.get_line_text(1));
+  EXPECT_EQ("", vt.get_line_text(2));
 }
 
 TEST(BasicTests, WriteStringWithReturn) {
-  TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
+  TestVtWrapper vt(80, 25);
 
-  const char *str = "Hello, cruel\rworld";
-  tmt_write(vt, str, strlen(str));
+  std::string text = "Hello, cruel\rworld";
+  vt.write_string(text);
 
-  EXPECT_TRUE(line_is_equal_to(*vt, 0, "world, cruel"));
-  EXPECT_TRUE(line_is_equal_to(*vt, 1, ""));
-
-  tmt_close(vt);
+  EXPECT_EQ("world, cruel", vt.get_line_text(0));
+  EXPECT_EQ("", vt.get_line_text(1));
 }
 
 TEST(BasicTests, WriteMultilineString) {
-  TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
+  TestVtWrapper vt(25, 80);
 
-  const char *str = "Hello, cruel\r\nworld";
-  tmt_write(vt, str, strlen(str));
+  std::string text = "Hello, cruel\r\nworld";
+  vt.write_string(text);
 
-  EXPECT_TRUE(line_is_equal_to(*vt, 0, "Hello, cruel"));
-  EXPECT_TRUE(line_is_equal_to(*vt, 1, "world"));
-  EXPECT_TRUE(line_is_equal_to(*vt, 2, ""));
-
-  tmt_close(vt);
+  EXPECT_EQ("Hello, cruel", vt.get_line_text(0));
+  EXPECT_EQ("world", vt.get_line_text(1));
+  EXPECT_EQ("", vt.get_line_text(2));
 }

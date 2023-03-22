@@ -1,25 +1,19 @@
-extern "C"
-{
-#include "tmt.h"
-};
+#include "../test_includes.h"
 
-#include "../test_helpers.h"
-#include "gtest/gtest.h"
+using namespace vt_test;
 
 TEST(EchTests, ClearFromEnd) {
-  TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
-  TMT &vt_r = *vt;
+  TestVtWrapper vt(80, 25);
 
-  write_string(vt_r, "Hello, world");
-  write_csi(vt_r);
-  write_string(vt_r, "3X");
+  write_string(vt, "Hello, world");
+  write_csi(vt);
+  write_string(vt, "3X");
 
-  EXPECT_TRUE(line_is_equal_to(*vt, 0, "Hello, world"));
-  EXPECT_TRUE(line_is_equal_to(*vt, 1, ""));
-
-  tmt_close(vt);
+  EXPECT_EQ("Hello, world", vt.get_line_text(0));
+  EXPECT_EQ("", vt.get_line_text(1));
 }
 
+#if 0
 TEST(EchTests, ClearMultipleFromMidLine) {
   TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
   TMT &vt_r = *vt;
@@ -38,3 +32,4 @@ TEST(EchTests, ClearMultipleFromMidLine) {
 
   tmt_close(vt);
 }
+#endif

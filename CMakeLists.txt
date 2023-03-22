@@ -29,8 +29,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     add_executable(
             tmt_test
             test/callback_handler.cpp
-            test/line_is_equal_to.cpp
             test/main.cpp
+            test/TestVtWrapper.cpp
             test/win_mem_leak.cpp
             test/write_strings.cpp
 

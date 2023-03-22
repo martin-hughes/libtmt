@@ -1,15 +1,7 @@
-extern "C"
-{
-#include "tmt.h"
-};
+#include "../test_includes.h"
 
-#include "../test_helpers.h"
-#include "gtest/gtest.h"
-
-TEST(BasicTests, DefaultValues)
-{
-  TMT* vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
-  //tmt_reset(vt);
+TEST(BasicTests, DefaultValues) {
+  TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
 
   tmt_write(vt, "hello", 5);
 
