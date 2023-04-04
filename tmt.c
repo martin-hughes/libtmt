@@ -128,7 +128,7 @@ scrup(TMT *vt, size_t r, size_t n)
     n = MIN(n, vt->screen.nline - 1 - r);
 
     if (n){
-        TMTLINE *buf[n];
+        TMTLINE **buf = calloc(n, sizeof(TMTLINE *));
 
         memcpy(buf, vt->screen.lines + r, n * sizeof(TMTLINE *));
         memmove(vt->screen.lines + r, vt->screen.lines + r + n,
@@ -138,6 +138,8 @@ scrup(TMT *vt, size_t r, size_t n)
 
         clearlines(vt, vt->screen.nline - n, n);
         dirtylines(vt, r, vt->screen.nline);
+
+        free(buf);
     }
 }
 
@@ -147,7 +149,7 @@ scrdn(TMT *vt, size_t r, size_t n)
     n = MIN(n, vt->screen.nline - 1 - r);
 
     if (n){
-        TMTLINE *buf[n];
+        TMTLINE **buf = calloc(n, sizeof(TMTLINE *));
 
         memcpy(buf, vt->screen.lines + (vt->screen.nline - n),
                n * sizeof(TMTLINE *));
@@ -157,6 +159,8 @@ scrdn(TMT *vt, size_t r, size_t n)
 
         clearlines(vt, r, n);
         dirtylines(vt, r, vt->screen.nline);
+
+        free(buf);
     }
 }
 

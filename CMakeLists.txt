@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.16)
 project(libtmt C CXX)
 
 # Thanks to https://google.github.io/googletest/quickstart-cmake.html for help setting up Googletest.
@@ -11,6 +11,8 @@ include_directories(.)
 add_library(tmt
         tmt.c
         tmt.h)
+
+option(UT_MEM_LEAK_CHECK "Run the memory leak checker on windows unit tests (no effect on non-Windows)" ON)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     include(FetchContent)
@@ -40,6 +42,9 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/cursor.cpp
             test/tests/default_vals.cpp
             test/tests/ech.cpp
+            test/tests/scrolling.cpp
+
+            test/tests/capabilities/rin.cpp
     )
 
     target_link_libraries(
@@ -47,6 +52,10 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             tmt
             GTest::gtest_main
     )
+
+    if (WIN32 AND UT_MEM_LEAK_CHECK)
+            add_compile_definitions(tmt_test UT_MEM_LEAK_CHECK)
+    endif()
 
     include(GoogleTest)
     gtest_discover_tests(tmt_test)

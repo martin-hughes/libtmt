@@ -3,3 +3,4 @@ output
 
 # IDE specific folders
 .idea
+.vscode
