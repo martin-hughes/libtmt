@@ -25,7 +25,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include <limits.h>
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,7 +40,6 @@
 #define P0(x) (vt->pars[x])
 #define P1(x) (vt->pars[x]? vt->pars[x] : 1)
 #define CB(vt, m, a) ((vt)->cb? (vt)->cb(m, vt, a, (vt)->p) : (void)0)
-#define INESC ((vt)->state)
 
 #if defined(__clang__) || defined(__llvm__) || defined (__GNUC__)
 #define MAYBE_UNUSED __attribute__((unused))
@@ -309,7 +307,7 @@ handlechar(TMT *vt, char i)
     DO(S_ARG, "T",          scrdn(vt, 0, P1(0)))
     DO(S_ARG, "X",          clearline(vt, l, c->c, P1(0) + c->c))
     DO(S_ARG, "Z",          while (c->c && t[--c->c].c != L'*'))
-    DO(S_ARG, "b",          rep(vt));
+    DO(S_ARG, "b",          rep(vt))
     DO(S_ARG, "c",          CB(vt, TMT_MSG_ANSWER, "\033[?6c"))
     DO(S_ARG, "g",          if (P0(0) == 3) clearline(vt, vt->tabs, 0, s->ncol))
     DO(S_ARG, "m",          sgr(vt))

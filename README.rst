@@ -68,8 +68,6 @@ Example Code
 Below is a simple program fragment giving the flavor of libtmt.
 Note that another good example is the `mtm`_ terminal multiplexer:
 
-.. _`mtm`: https://github.com/deadpixi/mtm
-
 .. code:: c
 
     #include <stdio.h>
