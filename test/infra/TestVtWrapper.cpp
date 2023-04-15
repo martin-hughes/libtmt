@@ -5,8 +5,19 @@
 
 using namespace vt_test;
 
-TestVtWrapper::TestVtWrapper(size_t cols, size_t rows) : cols{cols}, lines{rows} {
-  this->vt = tmt_open(rows, cols, nullptr, nullptr, nullptr);
+TestVtWrapper::TestVtWrapper(size_t cols, size_t rows) : TestVtWrapper(cols, rows, nullptr) {}
+
+TestVtWrapper::TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback) :
+    cols{cols}, lines{rows}, callback{std::move(callback)} {
+
+  TMTCALLBACK cb{nullptr};
+  void *p{nullptr};
+  if (this->callback) {
+    cb = static_callback;
+    p = this;
+  }
+
+  this->vt = tmt_open(rows, cols, cb, p, nullptr);
   tmt_clean(this->vt);
 }
 
@@ -53,4 +64,12 @@ bool TestVtWrapper::is_line_dirty(size_t line) {
   }
 
   return tmt_screen(vt)->lines[line]->dirty;
+}
+
+void TestVtWrapper::static_callback(tmt_msg_t msg, TMT *vt, const void *a, void *p) {
+  auto cp = static_cast<TestVtWrapper *>(p);
+
+  if (cp) {
+    cp->callback(msg, vt, a, p);
+  }
 }

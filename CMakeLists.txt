@@ -33,7 +33,9 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
             test/main.cpp
 
+            test/infra/GMockCallbacks.cpp
             test/infra/TestVtWrapper.cpp
+            test/infra/VtStdCallbacks.cpp
             test/infra/win_mem_leak.cpp
             test/infra/write_strings.cpp
 
@@ -46,12 +48,13 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/scrolling.cpp
 
             test/tests/capabilities/rin.cpp
-    )
+            test/infra/VtStdCallbacks.h)
 
     target_link_libraries(
             tmt_test
             tmt
             GTest::gtest_main
+            gmock
     )
 
     if (WIN32 AND UT_MEM_LEAK_CHECK)

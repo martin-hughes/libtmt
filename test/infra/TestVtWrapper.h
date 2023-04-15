@@ -5,12 +5,15 @@ extern "C"
 #include "tmt.h"
 }
 
+#include "VtStdCallbacks.h"
+
 #include <string>
 
 namespace vt_test {
   class TestVtWrapper {
   public:
     TestVtWrapper(size_t cols, size_t rows);
+    TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback);
     ~TestVtWrapper();
 
     TMT *get_vt();
@@ -25,5 +28,9 @@ namespace vt_test {
 
     size_t cols;
     size_t lines;
+    TmtCallbackType callback;
+
+    void init();
+    static void static_callback(tmt_msg_t msg, TMT *vt, const void *a, void *p);
   };
 }
