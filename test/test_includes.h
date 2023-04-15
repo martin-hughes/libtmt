@@ -5,6 +5,6 @@ extern "C"
 #include "tmt.h"
 };
 
-#include "test_helpers.h"
-#include "TestVtWrapper.h"
+#include "test/infra/test_helpers.h"
+#include "test/infra/TestVtWrapper.h"
 #include "gtest/gtest.h"

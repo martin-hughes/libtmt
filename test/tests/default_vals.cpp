@@ -1,7 +1,7 @@
 #include "../test_includes.h"
 
 TEST(BasicTests, DefaultValues) {
-  TMT *vt = tmt_open(80, 25, normal_callback, nullptr, nullptr);
+  TMT *vt = tmt_open(80, 25, nullptr, nullptr, nullptr);
 
   tmt_write(vt, "hello", 5);
 

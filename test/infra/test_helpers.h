@@ -5,7 +5,7 @@ extern "C"
 #include "tmt.h"
 }
 
-#include "TestVtWrapper.h"
+#include "test/infra/TestVtWrapper.h"
 
 #include <string>
 
@@ -15,8 +15,6 @@ enum class CursorMoveDir : char {
   Right = 'C',
   Left = 'D',
 };
-
-void normal_callback(tmt_msg_t m, TMT *vt, const void *a, void *p);
 
 namespace vt_test {
   void write_string(TestVtWrapper &vt, const std::string &string);

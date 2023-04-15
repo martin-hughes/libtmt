@@ -5,8 +5,9 @@
 
 using namespace vt_test;
 
-TestVtWrapper::TestVtWrapper(int cols, int rows) {
-  this->vt = tmt_open(rows, cols, normal_callback, nullptr, nullptr);
+TestVtWrapper::TestVtWrapper(size_t cols, size_t rows) : cols{cols}, lines{rows} {
+  this->vt = tmt_open(rows, cols, nullptr, nullptr, nullptr);
+  tmt_clean(this->vt);
 }
 
 TestVtWrapper::~TestVtWrapper() {
@@ -21,6 +22,10 @@ void TestVtWrapper::write_string(const std::string &string) {
   tmt_write(this->vt, string.c_str(), string.length());
 }
 
+void TestVtWrapper::set_clean() {
+  tmt_clean(this->vt);
+}
+
 std::string TestVtWrapper::get_line_text(size_t line, bool strip_trailing_spaces) {
   std::string result;
 
@@ -32,7 +37,7 @@ std::string TestVtWrapper::get_line_text(size_t line, bool strip_trailing_spaces
 
   const auto vt_line = screen->lines[line];
   for (size_t i = 0; i < screen->ncol; i++) {
-    result = result + static_cast<std::string::value_type>(vt_line->chars[i].c);
+    result += static_cast<std::string::value_type>(vt_line->chars[i].c);
   }
 
   if (strip_trailing_spaces) {
@@ -40,4 +45,12 @@ std::string TestVtWrapper::get_line_text(size_t line, bool strip_trailing_spaces
   }
 
   return result;
+}
+
+bool TestVtWrapper::is_line_dirty(size_t line) {
+  if (line > lines) {
+    throw std::invalid_argument("line must be within the terminal");
+  }
+
+  return tmt_screen(vt)->lines[line]->dirty;
 }

@@ -14,6 +14,10 @@ TEST(ScrollingTests, BasicOverflowScroll) {
   EXPECT_EQ(vt.get_line_text(0), "Row 4");
   EXPECT_EQ(vt.get_line_text(1), "Row 5");
   EXPECT_EQ(vt.get_line_text(2), "");
+
+  EXPECT_TRUE(vt.is_line_dirty(0));
+  EXPECT_TRUE(vt.is_line_dirty(1));
+  EXPECT_TRUE(vt.is_line_dirty(2));
 }
 
 // After a line is full the cursor automatically moves to the next line, which is why line 3 is blank in this test.
@@ -25,4 +29,8 @@ TEST(ScrollingTests, LongLineScrolling) {
   EXPECT_EQ(vt.get_line_text(0), "3333333333");
   EXPECT_EQ(vt.get_line_text(1), "4444444444");
   EXPECT_EQ(vt.get_line_text(2), "");
+
+  EXPECT_TRUE(vt.is_line_dirty(0));
+  EXPECT_TRUE(vt.is_line_dirty(1));
+  EXPECT_TRUE(vt.is_line_dirty(2));
 }

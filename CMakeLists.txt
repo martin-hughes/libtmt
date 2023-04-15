@@ -30,11 +30,12 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     add_executable(
             tmt_test
-            test/callback_handler.cpp
+
             test/main.cpp
-            test/TestVtWrapper.cpp
-            test/win_mem_leak.cpp
-            test/write_strings.cpp
+
+            test/infra/TestVtWrapper.cpp
+            test/infra/win_mem_leak.cpp
+            test/infra/write_strings.cpp
 
             test/tests/basic_writing.cpp
             test/tests/create_and_destroy.cpp
