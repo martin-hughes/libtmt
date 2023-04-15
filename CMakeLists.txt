@@ -44,11 +44,12 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/csi_params.cpp
             test/tests/cursor.cpp
             test/tests/default_vals.cpp
-            test/tests/ech.cpp
             test/tests/scrolling.cpp
 
+            test/tests/capabilities/bel.cpp
+            test/tests/capabilities/ech.cpp
             test/tests/capabilities/rin.cpp
-            test/infra/VtStdCallbacks.h)
+            )
 
     target_link_libraries(
             tmt_test
