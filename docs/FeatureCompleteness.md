@@ -15,7 +15,7 @@ implements that feature, and whether it is tested or not.
 | mc5i         | n/a                  |                    | Printer output will not display on screen          |                                                                                                                                                                         |
 | mir          | n/a                  |                    | Safe to move in insert mode                        |                                                                                                                                                                         |
 | msgr         | n/a                  |                    | Safe to move in standout mode                      |                                                                                                                                                                         |
-| colors       | 8                    | :x:                | Number of supported colours                        |                                                                                                                                                                         |
+| colors       | 8                    | :white_check_mark: | Number of supported colours                        |                                                                                                                                                                         |
 | cols         | 80                   | n/a                | Number of columns in the terminal                  | libtmt allows any number of columns                                                                                                                                     |
 | it           | 8                    |                    | Tabs initially every 'n' spaces                    |                                                                                                                                                                         |
 | lines        | 24                   | n/a                | Number of lines in the terminal                    | libtmt allows any number of lines in a terminal                                                                                                                         |
@@ -23,8 +23,8 @@ implements that feature, and whether it is tested or not.
 | pairs        | 64                   | :x:                | Maximum number of colour pairs displayed at a time | 64 (8 times 8) means any foreground/background pair is permissible. Not explicitly tested, but very likely to work.                                                     |
 | acsc         | see notes            | :x:                | Supported alternate character set                  | terminfo specifies +\020\,\021-\030.^Y0\333`\004a\261f\370g\361h\260j\331k\277l\332m\300n\305o~p\304q\304r\304s_t\303u\264v\301w\302x\263y\363z\362{\343\330}\234~\376, |
 | bel          | ^G / \x07            | :white_check_mark: | Terminal Bell                                      | Supported by the callback function                                                                                                                                      |
-| blink        | \E[5m                | :x:                | Blinking text                                      | Note 1                                                                                                                                                                  |
-| bold         | \E[1m                | :x:                | Bold text                                          | Note 1                                                                                                                                                                  |
+| blink        | \E[5m                | :white_check_mark: | Blinking text                                      | Note 1                                                                                                                                                                  |
+| bold         | \E[1m                | :white_check_mark: | Bold text                                          | Note 1                                                                                                                                                                  |
 | cbt          | \E[Z                 | :x:                | Back tab                                           |                                                                                                                                                                         |
 | clear        | \E[H\E[J             | :x:                | Clear screen and home cursor                       |                                                                                                                                                                         |
 | cr           | \r                   | :x:                | Carriage return                                    |                                                                                                                                                                         |
@@ -54,27 +54,27 @@ implements that feature, and whether it is tested or not.
 | il1          | \E[L                 | :x:                | Insert 1 line                                      |                                                                                                                                                                         |
 | ind          | \n                   | :x:                | Scroll forward 1 line                              |                                                                                                                                                                         |
 | indn         | \E[%p1%dS            | :x:                | Scroll forward P1 lines                            |                                                                                                                                                                         |
-| invis        | \E[8m                | :x:                | Invisible characters                               | Note 1                                                                                                                                                                  |
+| invis        | \E[8m                | :white_check_mark: | Invisible characters                               | Note 1                                                                                                                                                                  |
 | kbs          | ^H / \x08            | :x:                | Backspace (doesn't delete character)               |                                                                                                                                                                         |
 | kcbt         | \E[Z                 | :x:                | Back tab                                           | Note 3                                                                                                                                                                  |
 | kich1        | \E[L                 | :x:                | Insert character                                   | I don't know why this and `il1` share a code                                                                                                                            |
 | nel          | \r\E[S               | :x:                | Newline                                            |                                                                                                                                                                         |
-| op           | \E[39;49m            | :x:                | Set default pair to original value                 | Note 1                                                                                                                                                                  |
+| op           | \E[39;49m            | :white_check_mark: | Set default pair to original value                 | Note 1                                                                                                                                                                  |
 | rep          | %p1%c\E[%p2%{1}%-%db | :x:                | Repeat char P1 a total of P2 times                 |                                                                                                                                                                         |
 | rev          | \E[7m                | :x:                | Turn on reverse video                              | Note 1                                                                                                                                                                  |
 | rin          | \E[%p1%dT            | :white_check_mark: | Scroll back P1 lines                               |                                                                                                                                                                         |
 | rmacs        | \E[10m               | :x:                | Exit alternate character set mode                  | Note 4                                                                                                                                                                  |
 | rmpch        | \E[10m               | :x:                | Exit PC character set mode                         | Note 4                                                                                                                                                                  |
-| rmso         | \E[m                 | :x:                | Exit standout mode                                 | Note 1                                                                                                                                                                  |
-| rmul         | \E[m                 | :x:                | Exit underline mode                                | Note 1                                                                                                                                                                  |
-| setab        | \E[4%p1%dm           | :x:                | Set background colour                              | Note 1                                                                                                                                                                  |
-| setaf        | \E[3%p1%dm           | :x:                | Set foreground colour                              | Note 1                                                                                                                                                                  |
-| sgr          | (see below)          | :x:                | Set attributes                                     | Note 1                                                                                                                                                                  |
+| rmso         | \E[m                 | :white_check_mark: | Exit standout mode                                 | Note 1                                                                                                                                                                  |
+| rmul         | \E[m                 | :white_check_mark: | Exit underline mode                                | Note 1                                                                                                                                                                  |
+| setab        | \E[4%p1%dm           | :white_check_mark: | Set background colour                              | Note 1                                                                                                                                                                  |
+| setaf        | \E[3%p1%dm           | :white_check_mark: | Set foreground colour                              | Note 1                                                                                                                                                                  |
+| sgr          | (see below)          | :white_check_mark: | Set attributes                                     | Note 1                                                                                                                                                                  |
 | sgr0         | \E[0;10m             | :x:                | Turn off all attributes                            | Note 1                                                                                                                                                                  |
 | smacs        | \E[11m               | :x:                | Start alternate character set mode                 | Note 4                                                                                                                                                                  |
 | smpch        | \E[11m               | :x:                | Start PC character set mode                        | Note 4                                                                                                                                                                  |
-| smso         | \E[7m                | :x:                | Start standout mode                                | Note 1                                                                                                                                                                  |
-| smul         | \E[4m                | :x:                | Start underline mode                               | Note 1                                                                                                                                                                  |
+| smso         | \E[7m                | :white_check_mark: | Start standout mode                                | Note 1                                                                                                                                                                  |
+| smul         | \E[4m                | :white_check_mark: | Start underline mode                               | Note 1                                                                                                                                                                  |
 | tbc          | \E[3g                | :x:                | Clear all tabs                                     | Note 3                                                                                                                                                                  |
 | u7           | \E[6n                | :x:                | User string 7                                      |                                                                                                                                                                         |
 | u8           | \E[?%[;0123456789]c  | :x:                | User string 8                                      |                                                                                                                                                                         |
@@ -85,6 +85,7 @@ Notes:
 
 1. libtmt stores attributes, but since it doesn't render text to a graphical
     display the user is responsible for dealing with the stored attributes.
+    Most tests for attributes are in the `sgr` capability test.
 
 2. libtmt also supports `\E[2K`, which clears the entire line.
 
@@ -93,8 +94,6 @@ Notes:
 
 4. libtmt only supports one alternate character set - ACS mode - but the user
     can specify the ACS character set to use.
-
-5. Currently, no tests check that attributes are copied / set correctly. 
 
 The full keycode string for `sgr` is `\E[0;10%?%p1%t;7%;%?%p2%t;4%;%?%p3%t;7%;%?%p4%t;5%;%?%p6%t;1%;%?%p7%t;8%;%?%p9%t;11%;m,`
 
@@ -119,16 +118,17 @@ Strictly speaking these don't belong in libtmt if it's aiming to match the
 terminfo definition of `ansi`, but they will be left in unless they cause
 problems - this minimizes the risk of unintended consequences.
 
-| Keycode      | Description                                   |
-|--------------|-----------------------------------------------|
-| \E7 or \E[s  | Store cursor position and current attributes  |
-| \E8 or \E[u  | Retrieve cursor position and saved attributes |
-| \Ec          | Reset the terminal                            |
-| \E[ P1 E     | Cursor down P1 rows, move to first col        |
-| \E[ P1 F     | Cursor up P1 rows, move to first col          |
-| \E[ P1, P2 f | Cursor to (P1, P2)                            |
-| \E[ P1 h     | Show cursor if P1 == 25                       |
-| \E[ P1 l     | Hide cursor if P1 == 25                       |
+| Keycode       | Description                                   |
+|---------------|-----------------------------------------------|
+| \E7 or \E[s   | Store cursor position and current attributes  |
+| \E8 or \E[u   | Retrieve cursor position and saved attributes |
+| \Ec           | Reset the terminal                            |
+| \E[ P1 E      | Cursor down P1 rows, move to first col        |
+| \E[ P1 F      | Cursor up P1 rows, move to first col          |
+| \E[ P1, P2 f  | Cursor to (P1, P2)                            |
+| \E[ P1 h      | Show cursor if P1 == 25                       |
+| \E[ P1 l      | Hide cursor if P1 == 25                       |
+| \E[2m / \E23m | Dim text set / unset.                         |
 
 ## Features not tested
 

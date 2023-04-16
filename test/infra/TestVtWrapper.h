@@ -23,6 +23,8 @@ namespace vt_test {
     std::string get_line_text(size_t line, bool strip_trailing_spaces = true);
     bool is_line_dirty(size_t line);
 
+    TMTCHAR get_character(size_t row, size_t col);
+
   private:
     TMT *vt;
 

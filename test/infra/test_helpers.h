@@ -21,4 +21,5 @@ namespace vt_test {
   void write_escape(TestVtWrapper &vt);
   void write_csi(TestVtWrapper &vt);
   void write_cursor_move(TestVtWrapper &vt, CursorMoveDir dir, size_t places);
+  void write_sgr(TestVtWrapper &vt, const std::vector<unsigned int> &values);
 }

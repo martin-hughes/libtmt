@@ -66,6 +66,10 @@ bool TestVtWrapper::is_line_dirty(size_t line) {
   return tmt_screen(vt)->lines[line]->dirty;
 }
 
+TMTCHAR TestVtWrapper::get_character(size_t row, size_t col) {
+  return tmt_screen(vt)->lines[row]->chars[col];
+}
+
 void TestVtWrapper::static_callback(tmt_msg_t msg, TMT *vt, const void *a, void *p) {
   auto cp = static_cast<TestVtWrapper *>(p);
 
