@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 #ifdef UT_MEM_LEAK_CHECK
-#include "win_mem_leak.h"
+#include "infra/win_mem_leak.h"
 #endif
 
 using namespace std;
