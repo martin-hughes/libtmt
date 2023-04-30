@@ -1,16 +1,12 @@
-#include <iostream>
-#include <chrono>
-#include <string>
-
 #include "gtest/gtest.h"
+
 #ifdef UT_MEM_LEAK_CHECK
 #include "infra/win_mem_leak.h"
 #endif
 
 using namespace std;
 
-int main(int argc, char** argv)
-{
+int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
 
 #ifdef UT_MEM_LEAK_CHECK

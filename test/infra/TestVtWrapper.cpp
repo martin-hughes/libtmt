@@ -1,5 +1,4 @@
 #include "TestVtWrapper.h"
-#include "test_helpers.h"
 
 #include <stdexcept>
 
@@ -67,6 +66,9 @@ bool TestVtWrapper::is_line_dirty(size_t line) {
 }
 
 TMTCHAR TestVtWrapper::get_character(size_t row, size_t col) {
+  if ((row > lines) || (col > cols)) {
+    throw std::invalid_argument("row and col must be within the terminal");
+  }
   return tmt_screen(vt)->lines[row]->chars[col];
 }
 

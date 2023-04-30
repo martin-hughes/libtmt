@@ -2,14 +2,14 @@
 
 using namespace vt_test;
 
-TmtCallbackType vt_test::makeCallbackForGMocks(GMockCallbacks &callbacks) {
+TmtCallbackType vt_test::make_callback_for_gmocks(GMockCallbacks &callbacks) {
   VtCallbacks cb{
-      .bell = callbacks.bellCallback.AsStdFunction(),
-      .update = callbacks.updateCallback.AsStdFunction(),
-      .answer = callbacks.answerCallback.AsStdFunction(),
-      .cursor_moved = callbacks.cursorMovedCallback.AsStdFunction(),
-      .cursor_visible = callbacks.cursorVisibleCallback.AsStdFunction()
+      .bell = callbacks.bell_callback.AsStdFunction(),
+      .update = callbacks.update_callback.AsStdFunction(),
+      .answer = callbacks.answer_callback.AsStdFunction(),
+      .cursor_moved = callbacks.cursor_moved_callback.AsStdFunction(),
+      .cursor_visible = callbacks.cursor_visible_callback.AsStdFunction()
   };
 
-  return createCallbackFunction(cb);
+  return create_callback_function(cb);
 }

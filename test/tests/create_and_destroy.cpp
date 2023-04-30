@@ -8,8 +8,8 @@ TEST(BasicTests, CreateAndDestroy) {
   // 2- The tests are being run with valgrind (or similar)
 
   GMockCallbacks cbs;
-  EXPECT_CALL(cbs.updateCallback, Call).Times(1);
-  EXPECT_CALL(cbs.cursorMovedCallback, Call).Times(1);
+  EXPECT_CALL(cbs.update_callback, Call).Times(1);
+  EXPECT_CALL(cbs.cursor_moved_callback, Call).Times(1);
 
-  TestVtWrapper vt(10, 3, makeCallbackForGMocks(cbs));
+  TestVtWrapper vt(10, 3, make_callback_for_gmocks(cbs));
 }

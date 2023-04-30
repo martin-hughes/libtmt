@@ -13,12 +13,12 @@ namespace vt_test {
 
   struct GMockCallbacks {
   public:
-    GMockBellCallback bellCallback;
-    GMockUpdateCallback updateCallback;
-    GMockAnswerCallback answerCallback;
-    GMockCursorMovedCallback cursorMovedCallback;
-    GMockCursorVisibleCallback cursorVisibleCallback;
+    GMockBellCallback bell_callback;
+    GMockUpdateCallback update_callback;
+    GMockAnswerCallback answer_callback;
+    GMockCursorMovedCallback cursor_moved_callback;
+    GMockCursorVisibleCallback cursor_visible_callback;
   };
 
-  TmtCallbackType makeCallbackForGMocks(GMockCallbacks &callbacks);
+  TmtCallbackType make_callback_for_gmocks(GMockCallbacks &callbacks);
 }

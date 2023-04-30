@@ -76,13 +76,13 @@ TEST(CapabilityRin, ZeroParameterScrollsOneLine) {
 
   // - Once on startup
   // - once for each call of write_string and write_csi (5 times total)
-  EXPECT_CALL(cbs.updateCallback, Call).Times(6);
+  EXPECT_CALL(cbs.update_callback, Call).Times(6);
 
   // - once for startup
   // - once for each call of write_string that causes "Row [x]" to be written (3 times)
-  EXPECT_CALL(cbs.cursorMovedCallback, Call).Times(4);
+  EXPECT_CALL(cbs.cursor_moved_callback, Call).Times(4);
 
-  TestVtWrapper vt(10, 3, makeCallbackForGMocks(cbs));
+  TestVtWrapper vt(10, 3, make_callback_for_gmocks(cbs));
 
   vt.write_string("Row 1\r\n");
   vt.write_string("Row 2\r\n");

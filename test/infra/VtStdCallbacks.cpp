@@ -8,7 +8,7 @@
 static_assert(std::is_convertible_v<tmt_msg_t, int>);
 
 namespace {
-  void DefaultCallback(const vt_test::VtCallbacks &callbacks, int msg, TMT *vt, const void *a, const void *) {
+  void default_callback(const vt_test::VtCallbacks &callbacks, int msg, TMT *vt, const void *a, const void *) {
     switch (msg) {
       case TMT_MSG_BELL:
         callbacks.bell ? callbacks.bell() : (void) 0;
@@ -54,7 +54,7 @@ namespace {
 }
 
 namespace vt_test {
-  TmtCallbackType createCallbackFunction(const VtCallbacks &callbacks) {
-    return [callbacks](int msg, TMT *vt, const void *a, const void *p) { DefaultCallback(callbacks, msg, vt, a, p); };
+  TmtCallbackType create_callback_function(const VtCallbacks &callbacks) {
+    return [callbacks](int msg, TMT *vt, const void *a, const void *p) { default_callback(callbacks, msg, vt, a, p); };
   }
 }

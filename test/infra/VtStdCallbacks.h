@@ -25,5 +25,5 @@ namespace vt_test {
     CursorVisibleCallback cursor_visible;
   };
 
-  TmtCallbackType createCallbackFunction(const VtCallbacks &callbacks);
+  TmtCallbackType create_callback_function(const VtCallbacks &callbacks);
 }

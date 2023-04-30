@@ -32,7 +32,6 @@ namespace vt_test {
     size_t lines;
     TmtCallbackType callback;
 
-    void init();
     static void static_callback(tmt_msg_t msg, TMT *vt, const void *a, void *p);
   };
 }
