@@ -24,6 +24,7 @@ namespace vt_test {
     bool is_line_dirty(size_t line);
 
     TMTCHAR get_character(size_t row, size_t col);
+    TMTPOINT get_cursor_pos();
 
   private:
     TMT *vt;

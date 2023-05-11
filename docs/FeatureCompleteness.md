@@ -20,7 +20,7 @@ implements that feature, and whether it is tested or not.
 | it           | 8                    |                    | Tabs initially every 'n' spaces                    |                                                                                                                                                                         |
 | lines        | 24                   | n/a                | Number of lines in the terminal                    | libtmt allows any number of lines in a terminal                                                                                                                         |
 | ncv          | 3                    |                    | No colour video                                    |                                                                                                                                                                         |
-| pairs        | 64                   | :x:                | Maximum number of colour pairs displayed at a time | 64 (8 times 8) means any foreground/background pair is permissible. Not explicitly tested, but very likely to work.                                                     |
+| pairs        | 64                   | :ok:               | Maximum number of colour pairs displayed at a time | 64 (8 times 8) means any foreground/background pair is permissible. Not explicitly tested, but very likely to work.                                                     |
 | acsc         | see notes            | :x:                | Supported alternate character set                  | terminfo specifies +\020\,\021-\030.^Y0\333`\004a\261f\370g\361h\260j\331k\277l\332m\300n\305o~p\304q\304r\304s_t\303u\264v\301w\302x\263y\363z\362{\343\330}\234~\376, |
 | bel          | ^G / \x07            | :white_check_mark: | Terminal Bell                                      | Supported by the callback function                                                                                                                                      |
 | blink        | \E[5m                | :white_check_mark: | Blinking text                                      | Note 1                                                                                                                                                                  |
@@ -45,7 +45,7 @@ implements that feature, and whether it is tested or not.
 | ed           | \E[J                 | :x:                | Clear to end of screen                             |                                                                                                                                                                         |
 | el           | \E[K                 | :x:                | Clear to end of line                               | Note 2                                                                                                                                                                  |
 | el1          | \E[1K                | :x:                | Clear to beginning of line                         | Note 2                                                                                                                                                                  |
-| home /khome  | \E[H                 | :x:                | Move cursor to home                                |                                                                                                                                                                         |
+| home /khome  | \E[H                 | :white_check_mark: | Move cursor to home                                |                                                                                                                                                                         |
 | hpa          | \E[%i%p1%dG          | :x:                | Set cursor column                                  |                                                                                                                                                                         |
 | ht           | \E[I                 | :x:                | Move to next tab                                   | Note 3                                                                                                                                                                  |
 | hts          | \EH                  | :x:                | Set a tab in this column for all rows              | Note 3                                                                                                                                                                  |
@@ -118,17 +118,18 @@ Strictly speaking these don't belong in libtmt if it's aiming to match the
 terminfo definition of `ansi`, but they will be left in unless they cause
 problems - this minimizes the risk of unintended consequences.
 
-| Keycode       | Description                                   |
-|---------------|-----------------------------------------------|
-| \E7 or \E[s   | Store cursor position and current attributes  |
-| \E8 or \E[u   | Retrieve cursor position and saved attributes |
-| \Ec           | Reset the terminal                            |
-| \E[ P1 E      | Cursor down P1 rows, move to first col        |
-| \E[ P1 F      | Cursor up P1 rows, move to first col          |
-| \E[ P1, P2 f  | Cursor to (P1, P2)                            |
-| \E[ P1 h      | Show cursor if P1 == 25                       |
-| \E[ P1 l      | Hide cursor if P1 == 25                       |
-| \E[2m / \E23m | Dim text set / unset.                         |
+| Keycode       | Description                                                                                                |
+|---------------|------------------------------------------------------------------------------------------------------------|
+| \E7 or \E[s   | Store cursor position and current attributes                                                               |
+| \E8 or \E[u   | Retrieve cursor position and saved attributes                                                              |
+| \Ec           | Reset the terminal                                                                                         |
+| \E[ P1 E      | Cursor down P1 rows, move to first col                                                                     |
+| \E[ P1 F      | Cursor up P1 rows, move to first col                                                                       |
+| \E[ P1, P2 f  | Cursor to (P1, P2)                                                                                         |
+| \E[ P1 h      | Show cursor if P1 == 25                                                                                    |
+| \E[ P1 l      | Hide cursor if P1 == 25                                                                                    |
+| \E[2m / \E23m | Dim text set / unset.                                                                                      |
+| \E[ P1 J      | P1: 0 => clear after. 1 => clear before. 2 => clear all (ansi does not require a parameter and clears all) | 
 
 ## Features not tested
 

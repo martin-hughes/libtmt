@@ -1,4 +1,5 @@
 #include "TestVtWrapper.h"
+#include "tmt.h"
 
 #include <stdexcept>
 
@@ -70,6 +71,10 @@ TMTCHAR TestVtWrapper::get_character(size_t row, size_t col) {
     throw std::invalid_argument("row and col must be within the terminal");
   }
   return tmt_screen(vt)->lines[row]->chars[col];
+}
+
+TMTPOINT TestVtWrapper::get_cursor_pos() {
+  return *tmt_cursor(this->vt);
 }
 
 void TestVtWrapper::static_callback(tmt_msg_t msg, TMT *vt, const void *a, void *p) {
