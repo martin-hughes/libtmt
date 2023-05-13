@@ -34,7 +34,7 @@ implements that feature, and whether it is tested or not.
 | cud1 / kcud1 | \E[B                 | :x:                | Move cursor 1 place down                           |                                                                                                                                                                         |
 | cuf          | \E[%p1%dC            | :x:                | Move cursor P1 places right                        |                                                                                                                                                                         |
 | cuf1 / kcuf1 | \E[C                 | :x:                | Move cursor 1 place right                          |                                                                                                                                                                         |
-| cup          | \E[%i%p1%d;%p2%dH    | :x:                | Move cursor to row P1, column P2                   | libtmt also supports lowercase f as the final character                                                                                                                 |
+| cup          | \E[%i%p1%d;%p2%dH    | :white_check_mark: | Move cursor to row P1, column P2                   | libtmt also supports lowercase f as the final character                                                                                                                 |
 | cuu          | \E[%p1%dA            | :x:                | Move cursor P1 places up                           |                                                                                                                                                                         |
 | cuu1 / kcuu1 | \E[A                 | :x:                | Move cursor 1 place up                             |                                                                                                                                                                         |
 | dch          | \E[%p1%dP            | :x:                | Delete P1 characters from the cursor, to the right |                                                                                                                                                                         |
@@ -125,7 +125,7 @@ problems - this minimizes the risk of unintended consequences.
 | \Ec           | Reset the terminal                                                                                         |
 | \E[ P1 E      | Cursor down P1 rows, move to first col                                                                     |
 | \E[ P1 F      | Cursor up P1 rows, move to first col                                                                       |
-| \E[ P1, P2 f  | Cursor to (P1, P2)                                                                                         |
+| \E[ P1; P2 f  | Cursor to (P1, P2)                                                                                         |
 | \E[ P1 h      | Show cursor if P1 == 25                                                                                    |
 | \E[ P1 l      | Hide cursor if P1 == 25                                                                                    |
 | \E[2m / \E23m | Dim text set / unset.                                                                                      |

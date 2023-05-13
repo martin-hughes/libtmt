@@ -1,6 +1,7 @@
 #include "test_helpers.h"
 
 #include <numeric>
+#include <string>
 
 namespace vt_test {
   void write_string(TestVtWrapper &vt, const std::string &string) {
@@ -34,6 +35,13 @@ namespace vt_test {
           return x + ";" + std::to_string(y);
         }) + "m";
 
+    write_string(vt, command);
+  }
+
+  void set_cursor_pos(TestVtWrapper &vt, const TMTPOINT &position) {
+    write_csi(vt);
+
+    auto command = std::to_string(position.r) + ";" + std::to_string(position.c) + "H";
     write_string(vt, command);
   }
 }

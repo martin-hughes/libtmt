@@ -82,6 +82,9 @@ Returns a pointer to the terminal's screen image.
 
 Returns a pointer to the terminal's cursor position.
 
+**Note:** The position is based on the top left being (0, 0), whereas the 
+`cup` command sequence has the top left as (1, 1).
+
 ## tmt_clean()
 
 `void tmt_clean(TMT *vt)`
