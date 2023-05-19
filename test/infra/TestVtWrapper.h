@@ -16,15 +16,15 @@ namespace vt_test {
     TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback);
     ~TestVtWrapper();
 
-    TMT *get_vt();
+    [[nodiscard]] TMT *get_vt() const;
     void write_string(const std::string &string);
     void set_clean();
 
-    std::string get_line_text(size_t line, bool strip_trailing_spaces = true);
-    bool is_line_dirty(size_t line);
+    [[nodiscard]] std::string get_line_text(size_t line, bool strip_trailing_spaces = true) const;
+    [[nodiscard]] bool is_line_dirty(size_t line) const;
 
-    TMTCHAR get_character(size_t row, size_t col);
-    TMTPOINT get_cursor_pos();
+    [[nodiscard]] TMTCHAR get_character(size_t row, size_t col) const;
+    [[nodiscard]] TMTPOINT get_cursor_pos() const;
 
   private:
     TMT *vt;

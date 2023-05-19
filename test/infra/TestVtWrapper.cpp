@@ -25,7 +25,7 @@ TestVtWrapper::~TestVtWrapper() {
   tmt_close(this->vt);
 }
 
-TMT *TestVtWrapper::get_vt() {
+TMT *TestVtWrapper::get_vt() const {
   return this->vt;
 }
 
@@ -37,7 +37,7 @@ void TestVtWrapper::set_clean() {
   tmt_clean(this->vt);
 }
 
-std::string TestVtWrapper::get_line_text(size_t line, bool strip_trailing_spaces) {
+std::string TestVtWrapper::get_line_text(size_t line, bool strip_trailing_spaces) const {
   std::string result;
 
   const auto screen = tmt_screen(this->vt);
@@ -58,7 +58,7 @@ std::string TestVtWrapper::get_line_text(size_t line, bool strip_trailing_spaces
   return result;
 }
 
-bool TestVtWrapper::is_line_dirty(size_t line) {
+bool TestVtWrapper::is_line_dirty(size_t line) const {
   if (line > lines) {
     throw std::invalid_argument("line must be within the terminal");
   }
@@ -66,14 +66,14 @@ bool TestVtWrapper::is_line_dirty(size_t line) {
   return tmt_screen(vt)->lines[line]->dirty;
 }
 
-TMTCHAR TestVtWrapper::get_character(size_t row, size_t col) {
+TMTCHAR TestVtWrapper::get_character(size_t row, size_t col) const {
   if ((row > lines) || (col > cols)) {
     throw std::invalid_argument("row and col must be within the terminal");
   }
   return tmt_screen(vt)->lines[row]->chars[col];
 }
 
-TMTPOINT TestVtWrapper::get_cursor_pos() {
+TMTPOINT TestVtWrapper::get_cursor_pos() const {
   return *tmt_cursor(this->vt);
 }
 

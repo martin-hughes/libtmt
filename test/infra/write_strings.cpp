@@ -16,7 +16,7 @@ namespace vt_test {
     write_string(vt, "\u001b[");
   }
 
-  void write_cursor_move(TestVtWrapper &vt, CursorMoveDir dir, size_t places) {
+  void write_cursor_move(TestVtWrapper &vt, const CursorMoveDir dir, size_t places) {
     write_csi(vt);
 
     std::string command = std::to_string(places) + static_cast<std::string::value_type>(dir);
@@ -36,6 +36,17 @@ namespace vt_test {
         }) + "m";
 
     write_string(vt, command);
+  }
+
+  void write_erase(TestVtWrapper &vt, const std::optional<EraseDirection> dir) {
+    write_csi(vt);
+
+    if (dir) {
+      using T = std::underlying_type_t<const EraseDirection>;
+      write_string(vt, std::to_string(static_cast<T>(*dir)));
+    }
+
+    write_string(vt, "J");
   }
 
   void set_cursor_pos(TestVtWrapper &vt, const TMTPOINT &position) {
