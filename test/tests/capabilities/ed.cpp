@@ -1,3 +1,5 @@
+#include <array>
+
 #include "test/test_includes.h"
 
 using namespace vt_test;
