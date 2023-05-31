@@ -14,10 +14,10 @@ public:
   using ModesContainerType = std::vector<unsigned int>;
   using AttributeUpdateType = std::function<TMTATTRS(TMTATTRS test_attrs)>;
 
-  SgrTestFixture(std::string name, ModesContainerType modes, AttributeUpdateType attribute_update_fn) :
-      name{std::move(name)}, modes{std::move(modes)}, update_with_expectation{std::move(attribute_update_fn)} {};
+  SgrTestFixture(std::string_view name, ModesContainerType modes, AttributeUpdateType attribute_update_fn) :
+      name{name}, modes{std::move(modes)}, update_with_expectation{std::move(attribute_update_fn)} {};
 
-  const std::string name;
+  const std::string_view name;
   const std::vector<unsigned int> modes;
   const std::function<TMTATTRS(TMTATTRS test_attrs)> update_with_expectation;
 };
@@ -349,6 +349,6 @@ INSTANTIATE_TEST_SUITE_P(
     ),
     [](const auto &info) {
       // Can use info.param here to generate the test suffix
-      return info.param.name;
+      return std::string{info.param.name};
     }
 );
