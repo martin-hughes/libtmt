@@ -7,17 +7,19 @@ using namespace vt_test;
 
 TestVtWrapper::TestVtWrapper(size_t cols, size_t rows) : TestVtWrapper(cols, rows, nullptr) {}
 
-TestVtWrapper::TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback) :
-    cols{cols}, lines{rows}, callback{std::move(callback)} {
+TestVtWrapper::TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback, const bool receive_startup_msgs) :
+    cols{cols}, lines{rows}, callback{nullptr} {
 
-  TMTCALLBACK cb{nullptr};
-  void *p{nullptr};
-  if (this->callback) {
-    cb = static_callback;
-    p = this;
+  if (receive_startup_msgs) {
+    this->callback = std::move(callback);
   }
 
-  this->vt = tmt_open(rows, cols, cb, p, nullptr);
+  this->vt = tmt_open(rows, cols, static_callback, this, nullptr);
+
+  if (!receive_startup_msgs) {
+    this->callback = std::move(callback);
+  }
+
   tmt_clean(this->vt);
 }
 
@@ -80,7 +82,7 @@ TMTPOINT TestVtWrapper::get_cursor_pos() const {
 void TestVtWrapper::static_callback(tmt_msg_t msg, TMT *vt, const void *a, void *p) {
   auto cp = static_cast<TestVtWrapper *>(p);
 
-  if (cp) {
+  if (cp && cp->callback) {
     cp->callback(msg, vt, a, p);
   }
 }

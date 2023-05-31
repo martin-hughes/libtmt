@@ -13,7 +13,7 @@ namespace vt_test {
   class TestVtWrapper {
   public:
     TestVtWrapper(size_t cols, size_t rows);
-    TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback);
+    TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback, bool receive_startup_msgs = true);
     ~TestVtWrapper();
 
     [[nodiscard]] TMT *get_vt() const;
