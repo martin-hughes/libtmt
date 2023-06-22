@@ -33,6 +33,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
             test/main.cpp
 
+            test/infra/basic_scene.cpp
             test/infra/GMockCallbacks.cpp
             test/infra/TestVtWrapper.cpp
             test/infra/VtStdCallbacks.cpp
@@ -51,6 +52,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/capabilities/ech.cpp
             test/tests/capabilities/ed.cpp
             test/tests/capabilities/home.cpp
+            test/tests/capabilities/indn.cpp
             test/tests/capabilities/rin.cpp
             test/tests/capabilities/sgr.cpp
             test/tests/capabilities/u7.cpp

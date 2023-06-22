@@ -1,21 +1,7 @@
-#include <array>
-
 #include "test/test_includes.h"
 
 using namespace vt_test;
-
-namespace {
-  constexpr size_t test_rows = 5;
-  struct LineState {
-    bool is_dirty;
-    std::string contents;
-  };
-
-  using SceneData = std::array<LineState, test_rows>;
-
-  void set_scene(TestVtWrapper &vt);
-  void check_scene(const TestVtWrapper &vt, const SceneData &contents);
-}
+using namespace vt_test::basic_scene;
 
 TEST(CapabilityEd, DefaultClearsBelow) {
   TestVtWrapper vt(5, 5);
@@ -441,18 +427,4 @@ TEST(CapabilityEd, ClearCompletelyWorksAtEnd) {
        }};
 
   check_scene(vt, expected);
-}
-
-namespace {
-  void set_scene(TestVtWrapper &vt) {
-    write_string(vt, "111112222233333444445555");
-    vt.set_clean();
-  }
-
-  void check_scene(const TestVtWrapper &vt, const SceneData &contents) {
-    for (size_t i = 0; i < test_rows; i++) {
-      EXPECT_EQ(contents[i].is_dirty, vt.is_line_dirty(i));
-      EXPECT_EQ(contents[i].contents, vt.get_line_text(i));
-    }
-  }
 }
