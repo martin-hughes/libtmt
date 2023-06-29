@@ -66,13 +66,12 @@ INSTANTIATE_TEST_SUITE_P(
             "0D",
             {5, 4}
         },
-        // TODO: Bugfix. Issue #4.
-        /*CuxTestFixture{
+        CuxTestFixture{
             "LeftDoesNotExceedBoundary",
             {5, 5},
             "100D",
             {5, 1}
-        },*/
+        },
         CuxTestFixture{
             "LeftFromLeftNoChange",
             {5, 1},
