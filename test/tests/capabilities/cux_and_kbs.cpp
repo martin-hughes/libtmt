@@ -78,6 +78,12 @@ INSTANTIATE_TEST_SUITE_P(
             "D",
             {5, 1}
         },
+        CuxTestFixture{
+            "LeftFromRightWorks",
+            {5, 10},
+            "9D",
+            {5, 1}
+        },
 
         // RIGHT
         CuxTestFixture{
@@ -130,9 +136,6 @@ INSTANTIATE_TEST_SUITE_P(
             "0A",
             {4, 5}
         },
-
-        // TODO: Bugfixes. Issue #5
-        /*
         CuxTestFixture{
             "UpDoesNotExceedBoundary",
             {5, 5},
@@ -144,7 +147,13 @@ INSTANTIATE_TEST_SUITE_P(
             {1, 5},
             "A",
             {1, 5}
-        }*/
+        },
+        CuxTestFixture{
+            "UpFromBottomWorks",
+            {10, 5},
+            "9A",
+            {1, 5}
+        },
 
         // DOWN
         CuxTestFixture{
