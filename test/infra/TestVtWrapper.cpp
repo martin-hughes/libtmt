@@ -31,8 +31,8 @@ TMT *TestVtWrapper::get_vt() const {
   return this->vt;
 }
 
-void TestVtWrapper::write_string(const std::string &string) {
-  tmt_write(this->vt, string.c_str(), string.length());
+void TestVtWrapper::write_string(const std::string_view &string) {
+  tmt_write(this->vt, std::string{string}.c_str(), string.length());
 }
 
 void TestVtWrapper::set_clean() {

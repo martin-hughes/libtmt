@@ -28,15 +28,15 @@ implements that feature, and whether it is tested or not.
 | cbt          | \E[Z                 | :x:                  | Back tab                                           |                                                                                                                     |
 | clear        | \E[H\E[J             | :white_check_mark:   | Clear screen and home cursor                       | `home` and `ed` are tested separately.                                                                              |
 | cr           | \r                   | :white_check_mark:   | Carriage return                                    | Tested in the "BasicWriting" suite.                                                                                 |
-| cub          | \E[%p1%dD            | :x:                  | Move cursor P1 places to the left                  |                                                                                                                     |
-| cub1 / kcub1 | \E[D                 | :x:                  | Move cursor 1 place to the left                    |                                                                                                                     |
-| cud          | \E[%p1%dB            | :x:                  | Move cursor P1 places down                         |                                                                                                                     |
-| cud1 / kcud1 | \E[B                 | :x:                  | Move cursor 1 place down                           |                                                                                                                     |
-| cuf          | \E[%p1%dC            | :x:                  | Move cursor P1 places right                        |                                                                                                                     |
-| cuf1 / kcuf1 | \E[C                 | :x:                  | Move cursor 1 place right                          |                                                                                                                     |
+| cub          | \E[%p1%dD            | :bomb:               | Move cursor P1 places to the left                  | Note 12. Issue #4                                                                                                   |
+| cub1 / kcub1 | \E[D                 | :bomb:               | Move cursor 1 place to the left                    | Note 12. Issue #4                                                                                                   |
+| cud          | \E[%p1%dB            | :white_check_mark:   | Move cursor P1 places down                         |                                                                                                                     |
+| cud1 / kcud1 | \E[B                 | :white_check_mark:   | Move cursor 1 place down                           |                                                                                                                     |
+| cuf          | \E[%p1%dC            | :white_check_mark:   | Move cursor P1 places right                        |                                                                                                                     |
+| cuf1 / kcuf1 | \E[C                 | :white_check_mark:   | Move cursor 1 place right                          |                                                                                                                     |
 | cup          | \E[%i%p1%d;%p2%dH    | :white_check_mark:   | Move cursor to row P1, column P2                   | libtmt also supports lowercase f as the final character                                                             |
-| cuu          | \E[%p1%dA            | :x:                  | Move cursor P1 places up                           |                                                                                                                     |
-| cuu1 / kcuu1 | \E[A                 | :x:                  | Move cursor 1 place up                             |                                                                                                                     |
+| cuu          | \E[%p1%dA            | :bomb:               | Move cursor P1 places up                           | Note 12. Issue #5                                                                                                   |
+| cuu1 / kcuu1 | \E[A                 | :bomb:               | Move cursor 1 place up                             | Note 12. Issue #5                                                                                                   |
 | dch          | \E[%p1%dP            | :x:                  | Delete P1 characters from the cursor, to the right |                                                                                                                     |
 | dch1         | \E[P                 | :x:                  | Delete 1 character at the cursor position          |                                                                                                                     |
 | dl           | \E[%p1%dM            | :x:                  | Delete P1 lines                                    |                                                                                                                     |
@@ -55,7 +55,7 @@ implements that feature, and whether it is tested or not.
 | ind          | \n                   | :white_check_mark:   | Scroll forward 1 line                              | Tested in the "BasicWriting" suite.                                                                                 |
 | indn         | \E[%p1%dS            | :white_check_mark:   | Scroll forward P1 lines                            |                                                                                                                     |
 | invis        | \E[8m                | :white_check_mark:   | Invisible characters                               | Note 1                                                                                                              |
-| kbs          | ^H / \x08            | :x:                  | Backspace (doesn't delete character)               |                                                                                                                     |
+| kbs          | ^H / \x08            | :white_check_mark:   | Backspace (doesn't delete character)               |                                                                                                                     |
 | kcbt         | \E[Z                 | :x:                  | Back tab                                           | Note 3                                                                                                              |
 | kich1        | \E[L                 | :x:                  | Insert character                                   | I don't know why this and `il1` share a code                                                                        |
 | nel          | \r\E[S               | :x:                  | Newline                                            |                                                                                                                     |
@@ -111,6 +111,8 @@ Notes:
 10. libtmt treats this as dsr(6) even though that's not strictly specified by the ansi terminfo details.
 
 11. There are no specific tests for `am`, but plenty of tests rely on the automatic margin behaviour.
+
+12. If a move would take the cursor beyond the end of the screen, it is handled wrongly.
 
 ## Unsupported Features
 

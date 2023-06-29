@@ -1,10 +1,10 @@
 #include "test_helpers.h"
 
 #include <numeric>
-#include <string>
+#include <string_view>
 
 namespace vt_test {
-  void write_string(TestVtWrapper &vt, const std::string &string) {
+  void write_string(TestVtWrapper &vt, const std::string_view &string) {
     vt.write_string(string);
   }
 

@@ -7,7 +7,7 @@ extern "C"
 
 #include "VtStdCallbacks.h"
 
-#include <string>
+#include <string_view>
 
 namespace vt_test {
   class TestVtWrapper {
@@ -17,7 +17,7 @@ namespace vt_test {
     ~TestVtWrapper();
 
     [[nodiscard]] TMT *get_vt() const;
-    void write_string(const std::string &string);
+    void write_string(const std::string_view &string);
     void set_clean();
 
     [[nodiscard]] std::string get_line_text(size_t line, bool strip_trailing_spaces = true) const;
