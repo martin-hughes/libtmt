@@ -16,6 +16,10 @@ TestVtWrapper::TestVtWrapper(size_t cols, size_t rows, TmtCallbackType callback,
 
   this->vt = tmt_open(rows, cols, static_callback, this, nullptr);
 
+  if (!this->vt) {
+    throw std::runtime_error{"Failed to create vt"};
+  }
+
   if (!receive_startup_msgs) {
     this->callback = std::move(callback);
   }

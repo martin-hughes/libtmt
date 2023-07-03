@@ -1,0 +1,14 @@
+{
+   snprintf-conditional
+   Memcheck:Cond
+   ...
+   fun:snprintf
+   ...
+}
+{
+   snprintf-use
+   Memcheck:Value8
+   ...
+   fun:snprintf
+   ...
+}

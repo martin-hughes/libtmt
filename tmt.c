@@ -384,12 +384,24 @@ tmt_resize(TMT *vt, size_t nline, size_t ncol)
     TMTLINE **l = realloc(vt->screen.lines, nline * sizeof(TMTLINE *));
     if (!l) return false;
 
+    // realloc is not guaranteed to initialize additional line pointers.
+    for (size_t i = vt->screen.nline; i < nline; i++) {
+      l[i] = NULL;
+    }
+
     size_t pc = vt->screen.ncol;
     vt->screen.lines = l;
     vt->screen.ncol = ncol;
+    size_t old_nline = vt->screen.nline;
+
+    /* Make sure to update nline before making new allocations, so that if an allocation fails then tmt_close will
+     * still attempt to deallocate the newly allocated lines.
+     */
+    vt->screen.nline = nline;
+
     for (size_t i = 0; i < nline; i++){
         TMTLINE *nl = NULL;
-        if (i >= vt->screen.nline)
+        if (i >= old_nline)
             nl = vt->screen.lines[i] = allocline(vt, NULL, ncol, 0);
         else
             nl = allocline(vt, vt->screen.lines[i], ncol, pc);
@@ -397,10 +409,9 @@ tmt_resize(TMT *vt, size_t nline, size_t ncol)
         if (!nl) return false;
         vt->screen.lines[i] = nl;
     }
-    vt->screen.nline = nline;
 
     vt->tabs = allocline(vt, vt->tabs, ncol, 0);
-    if (!vt->tabs) return free(l), false;
+    if (!vt->tabs) return false;
     vt->tabs->chars[0].c = vt->tabs->chars[ncol - 1].c = L'*';
     for (size_t i = 0; i < ncol; i++) if (i % TAB == 0)
         vt->tabs->chars[i].c = L'*';
