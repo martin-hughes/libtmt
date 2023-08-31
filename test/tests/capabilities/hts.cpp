@@ -5,13 +5,6 @@ using namespace vt_test;
 // These tests assume that the tab character and tab command sequence `\E[I` operate identically, so only test using the
 // tab character.
 
-namespace {
-  void write_hts(TestVtWrapper &vt) {
-    write_escape(vt);
-    write_string(vt, "H");
-  }
-}
-
 TEST(CapabilityHts, DoesntMoveCursor) {
   TestVtWrapper vt{20, 3};
 

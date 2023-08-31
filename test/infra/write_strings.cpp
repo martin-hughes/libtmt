@@ -54,6 +54,11 @@ namespace vt_test {
     write_string(vt, "Z");
   }
 
+  void write_hts(TestVtWrapper &vt) {
+    write_escape(vt);
+    write_string(vt, "H");
+  }
+
   void set_cursor_pos(TestVtWrapper &vt, const TMTPOINT &position) {
     write_csi(vt);
 

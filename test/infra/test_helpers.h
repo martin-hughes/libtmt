@@ -31,6 +31,7 @@ namespace vt_test {
   void write_sgr(TestVtWrapper &vt, const std::vector<unsigned int> &values);
   void write_erase(TestVtWrapper &vt, std::optional<EraseDirection> dir = std::nullopt);
   void write_backtab(TestVtWrapper &vt);
+  void write_hts(TestVtWrapper &vt);
 
   void set_cursor_pos(TestVtWrapper &vt, const TMTPOINT &position);
 }

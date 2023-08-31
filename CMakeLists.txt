@@ -59,6 +59,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/capabilities/indn.cpp
             test/tests/capabilities/rin.cpp
             test/tests/capabilities/sgr.cpp
+            test/tests/capabilities/tbc.cpp
             test/tests/capabilities/u7.cpp
             test/tests/capabilities/u8_and_u9.cpp
             )
