@@ -2,13 +2,6 @@
 
 using namespace vt_test;
 
-namespace {
-  void write_backtab(TestVtWrapper &vt) {
-    write_csi(vt);
-    write_string(vt, "Z");
-  }
-}
-
 TEST(CapabilitCbt, MovesBetweenTabs) {
   TestVtWrapper vt{20, 3};
 

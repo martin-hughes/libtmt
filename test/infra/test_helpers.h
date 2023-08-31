@@ -30,6 +30,7 @@ namespace vt_test {
   void write_cursor_move(TestVtWrapper &vt, CursorMoveDir dir, size_t places);
   void write_sgr(TestVtWrapper &vt, const std::vector<unsigned int> &values);
   void write_erase(TestVtWrapper &vt, std::optional<EraseDirection> dir = std::nullopt);
+  void write_backtab(TestVtWrapper &vt);
 
   void set_cursor_pos(TestVtWrapper &vt, const TMTPOINT &position);
 }

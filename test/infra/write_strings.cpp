@@ -49,6 +49,11 @@ namespace vt_test {
     write_string(vt, "J");
   }
 
+  void write_backtab(TestVtWrapper &vt) {
+    write_csi(vt);
+    write_string(vt, "Z");
+  }
+
   void set_cursor_pos(TestVtWrapper &vt, const TMTPOINT &position) {
     write_csi(vt);
 
