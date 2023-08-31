@@ -46,7 +46,7 @@ implements that feature, and whether it is tested or not.
 | el           | \E[K                 | :x:                  | Clear to end of line                               | Note 2                                                                                                              |
 | el1          | \E[1K                | :x:                  | Clear to beginning of line                         | Note 2                                                                                                              |
 | home /khome  | \E[H                 | :white_check_mark:   | Move cursor to home                                |                                                                                                                     |
-| hpa          | \E[%i%p1%dG          | :x:                  | Set cursor column                                  |                                                                                                                     |
+| hpa          | \E[%i%p1%dG          | :white_check_mark:   | Set cursor column                                  |                                                                                                                     |
 | ht           | \E[I                 | :white_check_mark:   | Move to next tab                                   |                                                                                                                     |
 | hts          | \EH                  | :white_check_mark:   | Set a tab in this column for all rows              |                                                                                                                     |
 | ich          | \E[%p1%d@            | :x:                  | Insert character P1 times                          |                                                                                                                     |
@@ -79,7 +79,7 @@ implements that feature, and whether it is tested or not.
 | u7 / dsr(6)  | \E[6n                | :white_check_mark:   | User string 7                                      | Note 9                                                                                                              |
 | u8           | \E[?%[;0123456789]c  | :white_check_mark:   | User string 8                                      |                                                                                                                     |
 | u9           | \E[c                 | :white_check_mark:   | User string 9                                      |                                                                                                                     |
-| vpa          | \E[%i%p1%dd          | :x:                  | Set cursor to row P1                               |                                                                                                                     |
+| vpa          | \E[%i%p1%dd          | :white_check_mark:   | Set cursor to row P1                               |                                                                                                                     |
 
 Notes:
 

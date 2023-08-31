@@ -54,6 +54,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/capabilities/ech.cpp
             test/tests/capabilities/ed.cpp
             test/tests/capabilities/home.cpp
+            test/tests/capabilities/hpa.cpp
             test/tests/capabilities/ht.cpp
             test/tests/capabilities/hts.cpp
             test/tests/capabilities/indn.cpp
@@ -62,6 +63,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/capabilities/tbc.cpp
             test/tests/capabilities/u7.cpp
             test/tests/capabilities/u8_and_u9.cpp
+            test/tests/capabilities/vpa.cpp
             )
 
     target_link_libraries(
