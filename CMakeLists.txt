@@ -48,6 +48,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/scrolling.cpp
 
             test/tests/capabilities/bel.cpp
+            test/tests/capabilities/cbt.cpp
             test/tests/capabilities/cup.cpp
             test/tests/capabilities/cux_and_kbs.cpp
             test/tests/capabilities/ech.cpp
