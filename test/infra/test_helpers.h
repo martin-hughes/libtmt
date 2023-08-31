@@ -34,4 +34,22 @@ namespace vt_test {
   void write_hts(TestVtWrapper &vt);
 
   void set_cursor_pos(TestVtWrapper &vt, const TMTPOINT &position);
+
+  // Rely on default initialisation setting everything else to false.
+  constexpr TMTATTRS default_attrs{
+      .fg = TMT_COLOR_DEFAULT,
+      .bg = TMT_COLOR_DEFAULT
+  };
+}
+
+constexpr bool operator==(const TMTATTRS &a, const TMTATTRS &b) {
+  return
+      (a.bold == b.bold) &&
+      (a.dim == b.dim) &&
+      (a.underline == b.underline) &&
+      (a.blink == b.blink) &&
+      (a.reverse == b.reverse) &&
+      (a.invisible == b.invisible) &&
+      (a.fg == b.fg) &&
+      (a.bg == b.bg);
 }

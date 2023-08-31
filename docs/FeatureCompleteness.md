@@ -37,8 +37,8 @@ implements that feature, and whether it is tested or not.
 | cup          | \E[%i%p1%d;%p2%dH    | :white_check_mark:   | Move cursor to row P1, column P2                   | libtmt also supports lowercase f as the final character                                                             |
 | cuu          | \E[%p1%dA            | :white_check_mark:   | Move cursor P1 places up                           |                                                                                                                     |
 | cuu1 / kcuu1 | \E[A                 | :white_check_mark:   | Move cursor 1 place up                             |                                                                                                                     |
-| dch          | \E[%p1%dP            | :x:                  | Delete P1 characters from the cursor, to the right |                                                                                                                     |
-| dch1         | \E[P                 | :x:                  | Delete 1 character at the cursor position          |                                                                                                                     |
+| dch          | \E[%p1%dP            | :white_check_mark:   | Delete P1 characters from the cursor, to the right | Note 11                                                                                                             |
+| dch1         | \E[P                 | :white_check_mark:   | Delete 1 character at the cursor position          | Note 11                                                                                                             |
 | dl           | \E[%p1%dM            | :x:                  | Delete P1 lines                                    |                                                                                                                     |
 | dl1          | \E[M                 | :x:                  | Delete 1 line                                      |                                                                                                                     |
 | ech          | \E[%p1%dX            | :white_check_mark:   | Erase P1 characters                                |                                                                                                                     |
@@ -108,6 +108,9 @@ Notes:
 9. libtmt treats this as dsr(6) even though that's not strictly specified by the ansi terminfo details.
 
 10. There are no specific tests for `am`, but plenty of tests rely on the automatic margin behaviour.
+
+11. The newly empty characters are filled with the default display attributes. Different terminals do different things
+    here, so any sensible behaviour is probably reasonable. A more comprehensive description is in `tmt.c`.
 
 ## Unsupported Features
 

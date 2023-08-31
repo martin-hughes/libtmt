@@ -195,9 +195,28 @@ HANDLER(dch)
             (s->ncol - c->c - n) * sizeof(TMTCHAR));
 
     clearline(vt, l, s->ncol - n, s->ncol);
-    /* VT102 manual says the attribute for the newly empty characters
-     * should be the same as the last character moved left, which isn't
-     * what clearline() currently does.
+
+    /* There's a possible discussion to be had about what attributes should be
+     * set for the newly empty characters. Given that different terminals do
+     * different things, and there isn't a "standard ansi terminal", probably
+     * any reasonable behaviour is OK.
+     *
+     * In our case, we fill in the default attributes.
+     *
+     * References:
+     *
+     * The VT102 manual says the attribute for the newly empty characters
+     * should be the same as the last character moved left
+     * (See https://vt100.net/docs/vt102-ug/chapter5.html, search for "DCH")
+     *
+     * The VT220 has the newly empty characters with all attributes turned off
+     * (See https://vt100.net/dec/ek-vt220-rm-001.pdf page 72)
+     *
+     * VT520 uses "no visual character attributes" for newly empty characters
+     * (See http://web.mit.edu/dosathena/doc/www/ek-vt520-rm.pdf page 167)
+     *
+     * xterm & friends use the current sgr state for the newly empty
+     * characters (https://terminalguide.namepad.de/seq/csi_cp/)
      */
 }
 

@@ -26,24 +26,6 @@ class CapabilitySgr : public testing::TestWithParam<SgrTestFixture> {
 
 };
 
-// Rely on default initialisation setting everything else to false.
-const TMTATTRS default_attrs{
-    .fg = TMT_COLOR_DEFAULT,
-    .bg = TMT_COLOR_DEFAULT
-};
-
-constexpr bool operator==(const TMTATTRS &a, const TMTATTRS &b) {
-  return
-      (a.bold == b.bold) &&
-      (a.dim == b.dim) &&
-      (a.underline == b.underline) &&
-      (a.blink == b.blink) &&
-      (a.reverse == b.reverse) &&
-      (a.invisible == b.invisible) &&
-      (a.fg == b.fg) &&
-      (a.bg == b.bg);
-}
-
 const std::vector<unsigned int> all_modes{34, 44, 1, 2, 4, 5, 7, 8};
 constexpr TMTATTRS all_modes_attrs{
     .bold = true,
