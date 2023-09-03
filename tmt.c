@@ -123,7 +123,7 @@ clearlines(TMT *vt, size_t r, size_t n)
 static void
 scrup(TMT *vt, size_t r, size_t n)
 {
-    n = MIN(n, vt->screen.nline - 1 - r);
+    n = MIN(n, vt->screen.nline - r);
 
     if (n){
         TMTLINE **buf = calloc(n, sizeof(TMTLINE *));
@@ -142,9 +142,17 @@ scrup(TMT *vt, size_t r, size_t n)
 }
 
 static void
+indn(TMT *vt, size_t r, size_t n)
+{
+    /* Scroll, but make sure at least one line remains. */
+    n = MIN(n, vt->screen.nline - 1 - r);
+    scrup(vt, r, n);
+}
+
+static void
 scrdn(TMT *vt, size_t r, size_t n)
 {
-    n = MIN(n, vt->screen.nline - 1 - r);
+    n = MIN(n, vt->screen.nline - r);
 
     if (n){
         TMTLINE **buf = calloc(n, sizeof(TMTLINE *));
@@ -160,6 +168,14 @@ scrdn(TMT *vt, size_t r, size_t n)
 
         free(buf);
     }
+}
+
+static void
+rin(TMT *vt, size_t r, size_t n)
+{
+    /* Scroll, but make sure at least one line remains. */
+    n = MIN(n, vt->screen.nline - 1 - r);
+    scrdn(vt, r, n);
 }
 
 HANDLER(ed)
@@ -322,8 +338,8 @@ handlechar(TMT *vt, char i)
     DO(S_ARG, "L",          scrdn(vt, c->r, P1(0)))
     DO(S_ARG, "M",          scrup(vt, c->r, P1(0)))
     DO(S_ARG, "P",          dch(vt))
-    DO(S_ARG, "S",          scrup(vt, 0, P1(0)))
-    DO(S_ARG, "T",          scrdn(vt, 0, P1(0)))
+    DO(S_ARG, "S",          indn(vt, 0, P1(0)))
+    DO(S_ARG, "T",          rin(vt, 0, P1(0)))
     DO(S_ARG, "X",          clearline(vt, l, c->c, P1(0) + c->c))
     DO(S_ARG, "Z",          while (c->c && t[--c->c].c != L'*'))
     DO(S_ARG, "b",          rep(vt))
