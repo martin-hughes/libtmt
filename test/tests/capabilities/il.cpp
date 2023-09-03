@@ -4,29 +4,48 @@ using namespace vt_test;
 using namespace vt_test::basic_scene;
 
 namespace {
-  void write_dl(TestVtWrapper &vt, std::optional<const unsigned int> rows) {
+  void write_il(TestVtWrapper &vt, std::optional<const unsigned int> rows) {
     write_csi(vt);
 
     if (rows.has_value()) {
       write_string(vt, std::to_string(rows.value()));
     }
 
-    write_string(vt, "M");
+    write_string(vt, "L");
   }
 }
 
-TEST(CapabilityDl, DeletesRows) {
+TEST(CapabilityIl, InsertsRows) {
   TestVtWrapper vt{5, 5};
   set_scene(vt);
   set_cursor_pos(vt, {.r = 2, .c = 3});
 
-  write_dl(vt, 2);
+  write_il(vt, 2);
 
   SceneData expected
       {{
            {false, "11111"},
-           {true, "44444"},
-           {true, "5555"},
+           {true, ""},
+           {true, ""},
+           {true, "22222"},
+           {true, "33333"}
+       }};
+
+  check_scene(vt, expected);
+}
+
+TEST(CapabilityIl, InsertsIsLimitedByNumberOfRows) {
+  TestVtWrapper vt{5, 5};
+  set_scene(vt);
+  set_cursor_pos(vt, {.r = 2, .c = 3});
+
+  write_il(vt, 200);
+
+  SceneData expected
+      {{
+           {false, "11111"},
+           {true, ""},
+           {true, ""},
            {true, ""},
            {true, ""}
        }};
@@ -34,88 +53,69 @@ TEST(CapabilityDl, DeletesRows) {
   check_scene(vt, expected);
 }
 
-TEST(CapabilityDl, DeletesIsLimitedByNumberOfRows) {
+TEST(CapabilityIl, TreatsNoParamAsOneRow) {
   TestVtWrapper vt{5, 5};
   set_scene(vt);
   set_cursor_pos(vt, {.r = 2, .c = 3});
 
-  write_dl(vt, 200);
+  write_il(vt, std::nullopt);
 
   SceneData expected
       {{
            {false, "11111"},
            {true, ""},
-           {true, ""},
-           {true, ""},
-           {true, ""}
-       }};
-
-  check_scene(vt, expected);
-}
-
-TEST(CapabilityDl, TreatsNoParamAsOneRow) {
-  TestVtWrapper vt{5, 5};
-  set_scene(vt);
-  set_cursor_pos(vt, {.r = 2, .c = 3});
-
-  write_dl(vt, std::nullopt);
-
-  SceneData expected
-      {{
-           {false, "11111"},
+           {true, "22222"},
            {true, "33333"},
-           {true, "44444"},
-           {true, "5555"},
-           {true, ""}
+           {true, "44444"}
        }};
 
   check_scene(vt, expected);
 }
 
-TEST(CapabilityDl, TreatsZeroParamAsOneRow) {
+TEST(CapabilityIl, TreatsZeroParamAsOneRow) {
   TestVtWrapper vt{5, 5};
   set_scene(vt);
   set_cursor_pos(vt, {.r = 2, .c = 3});
 
-  write_dl(vt, 0);
+  write_il(vt, 0);
 
   SceneData expected
       {{
            {false, "11111"},
+           {true, ""},
+           {true, "22222"},
            {true, "33333"},
-           {true, "44444"},
-           {true, "5555"},
-           {true, ""}
+           {true, "44444"}
        }};
 
   check_scene(vt, expected);
 }
 
-TEST(CapabilityDl, DeletesTopRow) {
+TEST(CapabilityIl, InsertsAtTopRow) {
   TestVtWrapper vt{5, 5};
   set_scene(vt);
   set_cursor_pos(vt, {.r = 1, .c = 3});
 
-  write_dl(vt, 1);
+  write_il(vt, 1);
 
   SceneData expected
       {{
+           {true, ""},
+           {true, "11111"},
            {true, "22222"},
            {true, "33333"},
-           {true, "44444"},
-           {true, "5555"},
-           {true, ""}
+           {true, "44444"}
        }};
 
   check_scene(vt, expected);
 }
 
-TEST(CapabilityDl, DeletesBottomRow) {
+TEST(CapabilityIl, DeletesBottomRow) {
   TestVtWrapper vt{5, 5};
   set_scene(vt);
   set_cursor_pos(vt, {.r = 5, .c = 3});
 
-  write_dl(vt, 1);
+  write_il(vt, 1);
 
   SceneData expected
       {{
