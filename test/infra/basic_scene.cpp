@@ -17,4 +17,13 @@ namespace vt_test::basic_scene {
       EXPECT_EQ(contents[i].contents, vt.get_line_text(i));
     }
   }
+
+  const SceneData default_scene_data
+      {{
+           {false, "11111"},
+           {false, "22222"},
+           {false, "33333"},
+           {false, "44444"},
+           {false, "5555"}
+       }};
 }

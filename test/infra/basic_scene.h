@@ -15,4 +15,6 @@ namespace vt_test::basic_scene {
 
   void set_scene(TestVtWrapper &vt);
   void check_scene(const TestVtWrapper &vt, const SceneData &contents);
+
+  extern const SceneData default_scene_data;
 }
