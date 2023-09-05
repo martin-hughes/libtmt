@@ -193,13 +193,12 @@ HANDLER(ed)
 }
 
 HANDLER(ich)
-    size_t n = P1(0); /* XXX use MAX */
-    if (n > s->ncol - c->c - 1) n = s->ncol - c->c - 1;
+    size_t n = P1(0);
+    n = MIN(n, s->ncol - c->c);
+    size_t chars_to_move = s->ncol - c->c - n;
 
-    memmove(l->chars + c->c + n, l->chars + c->c,
-            MIN(s->ncol - 1 - c->c,
-            (s->ncol - c->c - n - 1)) * sizeof(TMTCHAR));
-    clearline(vt, l, c->c, n);
+    memmove(l->chars + c->c + n, l->chars + c->c, chars_to_move * sizeof(TMTCHAR));
+    clearline(vt, l, c->c, c->c + n);
 }
 
 HANDLER(dch)

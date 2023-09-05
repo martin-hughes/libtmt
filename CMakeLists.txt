@@ -60,6 +60,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
             test/tests/capabilities/hpa.cpp
             test/tests/capabilities/ht.cpp
             test/tests/capabilities/hts.cpp
+            test/tests/capabilities/ich.cpp
             test/tests/capabilities/il.cpp
             test/tests/capabilities/indn.cpp
             test/tests/capabilities/rin.cpp
