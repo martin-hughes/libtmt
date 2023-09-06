@@ -10,7 +10,7 @@ TEST(CapabilityEd, DefaultClearsBelow) {
 
   write_erase(vt);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, "22"},
@@ -33,7 +33,7 @@ TEST(CapabilityEd, ClearsBelowWhenRequested) {
 
   write_erase(vt, EraseDirection::Below);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, "22"},
@@ -56,7 +56,7 @@ TEST(CapabilityEd, ClearBelowWorksAtBottom) {
 
   write_erase(vt, EraseDirection::Below);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {false, "22222"},
@@ -75,7 +75,7 @@ TEST(CapabilityEd, ClearBelowWorksInLeftCol) {
 
   write_erase(vt, EraseDirection::Below);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, ""},
@@ -94,7 +94,7 @@ TEST(CapabilityEd, ClearBelowWorksInRightCol) {
 
   write_erase(vt, EraseDirection::Below);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, "2222"},
@@ -113,7 +113,7 @@ TEST(CapabilityEd, ClearBelowWorksAtTop) {
 
   write_erase(vt, EraseDirection::Below);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "11"},
            {true, ""},
@@ -132,7 +132,7 @@ TEST(CapabilityEd, ClearBelowWorksAtOrigin) {
 
   write_erase(vt, EraseDirection::Below);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -151,7 +151,7 @@ TEST(CapabilityEd, ClearBelowWorksAtEnd) {
 
   write_erase(vt, EraseDirection::Below);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {false, "22222"},
@@ -170,7 +170,7 @@ TEST(CapabilityEd, ClearsAboveWhenRequested) {
 
   write_erase(vt, EraseDirection::Above);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, "  222"},
@@ -189,7 +189,7 @@ TEST(CapabilityEd, ClearAboveWorksAtBottom) {
 
   write_erase(vt, EraseDirection::Above);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -208,7 +208,7 @@ TEST(CapabilityEd, ClearAboveWorksInLeftCol) {
 
   write_erase(vt, EraseDirection::Above);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, "22222"},
@@ -227,7 +227,7 @@ TEST(CapabilityEd, ClearAboveWorksInRightCol) {
 
   write_erase(vt, EraseDirection::Above);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, "    2"},
@@ -246,7 +246,7 @@ TEST(CapabilityEd, ClearAboveWorksWhenAtTop) {
 
   write_erase(vt, EraseDirection::Above);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "  111"},
            {false, "22222"},
@@ -265,7 +265,7 @@ TEST(CapabilityEd, ClearAboveWorksAtOrigin) {
 
   write_erase(vt, EraseDirection::Above);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "11111"}, // Even though no changes are made, dirty is still set.
            {false, "22222"},
@@ -284,7 +284,7 @@ TEST(CapabilityEd, ClearAboveWorksAtEnd) {
 
   write_erase(vt, EraseDirection::Above);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -303,7 +303,7 @@ TEST(CapabilityEd, ClearsCompletelyWhenRequested) {
 
   write_erase(vt, EraseDirection::Complete);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -322,7 +322,7 @@ TEST(CapabilityEd, ClearCompletelyWorksAtBottom) {
 
   write_erase(vt, EraseDirection::Complete);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -341,7 +341,7 @@ TEST(CapabilityEd, ClearCompletelyWorksInLeftCol) {
 
   write_erase(vt, EraseDirection::Complete);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -360,7 +360,7 @@ TEST(CapabilityEd, ClearCompletelyWorksInRightCol) {
 
   write_erase(vt, EraseDirection::Complete);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -379,7 +379,7 @@ TEST(CapabilityEd, ClearCompletelyWorksWhenAtTop) {
 
   write_erase(vt, EraseDirection::Complete);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -398,7 +398,7 @@ TEST(CapabilityEd, ClearCompletelyWorksAtOrigin) {
 
   write_erase(vt, EraseDirection::Complete);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},
@@ -417,7 +417,7 @@ TEST(CapabilityEd, ClearCompletelyWorksAtEnd) {
 
   write_erase(vt, EraseDirection::Complete);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, ""},

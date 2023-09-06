@@ -22,7 +22,7 @@ TEST(CapabilityDl, DeletesRows) {
 
   write_dl(vt, 2);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, "44444"},
@@ -41,7 +41,7 @@ TEST(CapabilityDl, DeletesIsLimitedByNumberOfRows) {
 
   write_dl(vt, 200);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, ""},
@@ -60,7 +60,7 @@ TEST(CapabilityDl, TreatsNoParamAsOneRow) {
 
   write_dl(vt, std::nullopt);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, "33333"},
@@ -79,7 +79,7 @@ TEST(CapabilityDl, TreatsZeroParamAsOneRow) {
 
   write_dl(vt, 0);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, "33333"},
@@ -98,7 +98,7 @@ TEST(CapabilityDl, DeletesTopRow) {
 
   write_dl(vt, 1);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "22222"},
            {true, "33333"},
@@ -117,7 +117,7 @@ TEST(CapabilityDl, DeletesBottomRow) {
 
   write_dl(vt, 1);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {false, "22222"},

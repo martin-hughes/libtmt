@@ -75,6 +75,8 @@ struct TMT{
     size_t npar;
     size_t arg;
     enum {S_NUL, S_ESC, S_ARG} state;
+
+    wchar_t last_printable;
 };
 
 static TMTATTRS defattrs = {.fg = TMT_COLOR_DEFAULT, .bg = TMT_COLOR_DEFAULT};
@@ -267,10 +269,9 @@ HANDLER(sgr)
 }
 
 HANDLER(rep)
-    if (!c->c) return;
-    wchar_t r = l->chars[c->c - 1].c;
+    if (!vt->last_printable) return;
     for (size_t i = 0; i < P1(0); i++)
-        writecharatcurs(vt, r);
+        writecharatcurs(vt, vt->last_printable);
 }
 
 HANDLER(dsr)
@@ -303,7 +304,7 @@ handlechar(TMT *vt, char i)
     char cs[] = {i, 0};
     #define ON(S, C, A) if (vt->state == (S) && strchr(C, i)){ A; return true;}
     #define DO(S, C, A) ON(S, C, consumearg(vt); if (!vt->ignored) {A;} \
-                                 fixcursor(vt); resetparser(vt););
+                                 fixcursor(vt); resetparser(vt); vt->last_printable = 0;);
 
     DO(S_NUL, "\x07",       CB(vt, TMT_MSG_BELL, NULL))
     DO(S_NUL, "\x08",       if (c->c) c->c--)
@@ -352,6 +353,9 @@ handlechar(TMT *vt, char i)
     DO(S_ARG, "s",          vt->oldcurs = vt->curs; vt->oldattrs = vt->attrs)
     DO(S_ARG, "u",          vt->curs = vt->oldcurs; vt->attrs = vt->oldattrs)
     DO(S_ARG, "@",          ich(vt))
+
+    /* Any invalid trip through the parser should clear the last printable character */
+    if (vt->state != S_NUL) vt->last_printable = 0;
 
     return resetparser(vt), false;
 }
@@ -471,6 +475,11 @@ writecharatcurs(TMT *vt, wchar_t w)
     CLINE(vt)->chars[vt->curs.c].a = vt->attrs;
     CLINE(vt)->dirty = vt->dirty = true;
 
+    if (w >= 32)
+        vt->last_printable = w;
+    else
+        vt->last_printable = 0;
+
     if (c->c < s->ncol - 1)
         c->c++;
     else{
@@ -552,6 +561,7 @@ tmt_reset(TMT *vt)
     vt->curs.r = vt->curs.c = vt->oldcurs.r = vt->oldcurs.c = vt->acs = (bool)0;
     resetparser(vt);
     vt->attrs = vt->oldattrs = defattrs;
+    vt->last_printable = 0;
     memset(&vt->ms, 0, sizeof(vt->ms));
     clearlines(vt, 0, vt->screen.nline);
     CB(vt, TMT_MSG_CURSOR, "t");

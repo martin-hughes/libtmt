@@ -11,10 +11,22 @@ namespace vt_test::basic_scene {
     std::string contents;
   };
 
-  using SceneData = std::array<LineState, test_rows>;
+  template <size_t n>
+  using SceneData = std::array<LineState, n>;
+
+  using DefaultSizeSceneData = std::array<LineState, test_rows>;
 
   void set_scene(TestVtWrapper &vt);
-  void check_scene(const TestVtWrapper &vt, const SceneData &contents);
 
-  extern const SceneData default_scene_data;
+  void check_scene_row(const TestVtWrapper &vt, const LineState &row, size_t row_num);
+
+  template<size_t n>
+  void check_scene(const TestVtWrapper &vt, const SceneData<n> &contents) {
+    // Can't use range-based for loop as we need the index for the member calls on vt.
+    for (size_t i = 0; i < n; i++) {
+      check_scene_row(vt, contents[i], i);
+    }
+  }
+
+  extern const DefaultSizeSceneData default_scene_data;
 }

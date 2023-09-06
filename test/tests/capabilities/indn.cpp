@@ -11,7 +11,7 @@ TEST(CapabilityIndn, NoParameterScrollsOneLine) {
   write_csi(vt);
   write_string(vt, "S");
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "22222"},
            {true, "33333"},
@@ -35,7 +35,7 @@ TEST(CapabilityIndn, ValidParameterScrollsAsExpected) {
   write_csi(vt);
   write_string(vt, "2S");
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "33333"},
            {true, "44444"},
@@ -55,7 +55,7 @@ TEST(CapabilityIndn, ExcessiveParameterTruncated) {
   write_csi(vt);
   write_string(vt, "100S");
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "5555"},
            {true, ""},
@@ -78,7 +78,7 @@ TEST(CapabilityIndn, ZeroParameterScrollsOneLine) {
   write_csi(vt);
   write_string(vt, "0S");
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, "22222"},
            {true, "33333"},

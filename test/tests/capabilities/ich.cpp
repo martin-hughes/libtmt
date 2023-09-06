@@ -10,7 +10,7 @@ namespace {
     vt.set_clean();
   }
 
-  const SceneData default_ich_scene_data
+  const DefaultSizeSceneData default_ich_scene_data
       {{
            {false, "12345"},
            {false, "abcde"},
@@ -36,7 +36,7 @@ TEST(CapabilityEl, InsertsOneCharByDefault) {
 
   write_ich(vt);
 
-  SceneData expected = default_ich_scene_data;
+  DefaultSizeSceneData expected = default_ich_scene_data;
   expected[1] = {true, "ab cd"};
 
   check_scene(vt, expected);
@@ -53,7 +53,7 @@ TEST(CapabilityEl, InsertsSmallNumber) {
 
   write_ich(vt, 2);
 
-  SceneData expected = default_ich_scene_data;
+  DefaultSizeSceneData expected = default_ich_scene_data;
   expected[1] = {true, "ab  c"};
 
   check_scene(vt, expected);
@@ -70,7 +70,7 @@ TEST(CapabilityEl, TruncatesInsertOfTooLargeNumber) {
 
   write_ich(vt, 20);
 
-  SceneData expected = default_ich_scene_data;
+  DefaultSizeSceneData expected = default_ich_scene_data;
   expected[1] = {true, "ab"};
 
   check_scene(vt, expected);
@@ -87,7 +87,7 @@ TEST(CapabilityEl, InsertsFromFirstCol) {
 
   write_ich(vt, 3);
 
-  SceneData expected = default_ich_scene_data;
+  DefaultSizeSceneData expected = default_ich_scene_data;
   expected[1] = {true, "   ab"};
 
   check_scene(vt, expected);
@@ -104,7 +104,7 @@ TEST(CapabilityEl, InsertsAcrossWholeRowIfNeeded) {
 
   write_ich(vt, 10);
 
-  SceneData expected = default_ich_scene_data;
+  DefaultSizeSceneData expected = default_ich_scene_data;
   expected[1] = {true, ""};
 
   check_scene(vt, expected);
@@ -121,7 +121,7 @@ TEST(CapabilityEl, InsertsOkInLastColumn) {
 
   write_ich(vt, 2);
 
-  SceneData expected = default_ich_scene_data;
+  DefaultSizeSceneData expected = default_ich_scene_data;
   expected[1] = {true, "abcd"};
 
   check_scene(vt, expected);

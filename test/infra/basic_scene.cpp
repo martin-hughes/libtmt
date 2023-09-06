@@ -11,14 +11,12 @@ namespace vt_test::basic_scene {
     vt.set_clean();
   }
 
-  void check_scene(const TestVtWrapper &vt, const SceneData &contents) {
-    for (size_t i = 0; i < test_rows; i++) {
-      EXPECT_EQ(contents[i].is_dirty, vt.is_line_dirty(i));
-      EXPECT_EQ(contents[i].contents, vt.get_line_text(i));
-    }
+  void check_scene_row(const TestVtWrapper &vt, const LineState &row, size_t row_num) {
+    EXPECT_EQ(row.is_dirty, vt.is_line_dirty(row_num));
+    EXPECT_EQ(row.contents, vt.get_line_text(row_num));
   }
 
-  const SceneData default_scene_data
+  const DefaultSizeSceneData default_scene_data
       {{
            {false, "11111"},
            {false, "22222"},

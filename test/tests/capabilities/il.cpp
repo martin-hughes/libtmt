@@ -22,7 +22,7 @@ TEST(CapabilityIl, InsertsRows) {
 
   write_il(vt, 2);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, ""},
@@ -41,7 +41,7 @@ TEST(CapabilityIl, InsertsIsLimitedByNumberOfRows) {
 
   write_il(vt, 200);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, ""},
@@ -60,7 +60,7 @@ TEST(CapabilityIl, TreatsNoParamAsOneRow) {
 
   write_il(vt, std::nullopt);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, ""},
@@ -79,7 +79,7 @@ TEST(CapabilityIl, TreatsZeroParamAsOneRow) {
 
   write_il(vt, 0);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {true, ""},
@@ -98,7 +98,7 @@ TEST(CapabilityIl, InsertsAtTopRow) {
 
   write_il(vt, 1);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {true, ""},
            {true, "11111"},
@@ -117,7 +117,7 @@ TEST(CapabilityIl, DeletesBottomRow) {
 
   write_il(vt, 1);
 
-  SceneData expected
+  DefaultSizeSceneData expected
       {{
            {false, "11111"},
            {false, "22222"},

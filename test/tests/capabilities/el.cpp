@@ -21,7 +21,7 @@ TEST(CapabilityEl, ClearsToEndByDefault) {
 
   write_el(vt);
 
-  SceneData expected = default_scene_data;
+  DefaultSizeSceneData expected = default_scene_data;
   expected[1] = {true, "22"};
 
   check_scene(vt, expected);
@@ -38,7 +38,7 @@ TEST(CapabilityEl, ClearsLastCharIfClearRightAtEbd) {
 
   write_el(vt);
 
-  SceneData expected = default_scene_data;
+  DefaultSizeSceneData expected = default_scene_data;
   expected[1] = {true, "2222"};
 
   check_scene(vt, expected);
@@ -51,7 +51,7 @@ TEST(CapabilityEl, ClearsToEndWithZeroParam) {
 
   write_el(vt, 0);
 
-  SceneData expected = default_scene_data;
+  DefaultSizeSceneData expected = default_scene_data;
   expected[1] = {true, "22"};
 
   check_scene(vt, expected);
@@ -68,7 +68,7 @@ TEST(CapabilityEl, ClearsToStartWithOneParam) {
 
   write_el(vt, 1);
 
-  SceneData expected = default_scene_data;
+  DefaultSizeSceneData expected = default_scene_data;
   expected[1] = {true, "   22"};
 
   check_scene(vt, expected);
@@ -85,7 +85,7 @@ TEST(CapabilityEl, ClearsFirstCellInFirstCol) {
 
   write_el(vt, 1);
 
-  SceneData expected = default_scene_data;
+  DefaultSizeSceneData expected = default_scene_data;
   expected[1] = {true, " 2222"};
 
   check_scene(vt, expected);
@@ -98,7 +98,7 @@ TEST(CapabilityEl, ClearsCompleteLineWithTwoParam) {
 
   write_el(vt, 2);
 
-  SceneData expected = default_scene_data;
+  DefaultSizeSceneData expected = default_scene_data;
   expected[1] = {true, ""};
 
   check_scene(vt, expected);
