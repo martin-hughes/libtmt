@@ -30,6 +30,23 @@ considerably easier to use.
 .. _`mtm`: https://github.com/deadpixi/mtm
 .. _`libtsm`: https://www.freedesktop.org/wiki/Software/kmscon/libtsm/
 
+Status
+======
+
+This library is essentially finalised. I don't have any work I plan to do on
+it in the near future. There are a few areas that aren't necessarily perfect,
+but I don't plan to work on them until someone needs me to.
+
+These are:
+
+- Seeing how well the CMake Library make system works
+- Testing alternate character sets
+- Adding more in depth testing that character attributes are handled properly
+  (I think they are, but some more testing would be nice)
+
+As always though, feel free to add PRs or issues covering these or any other
+things. I'll work on anything that comes up!
+
 Documentation
 =============
 
